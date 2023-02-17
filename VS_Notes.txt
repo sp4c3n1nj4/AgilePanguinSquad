@@ -1,0 +1,69 @@
+If you're using one of the university computers in the ludology lab, that should be enough, settings are nearly identical, don't touch any of the visual studio settings
+
+PERSONAL PC ONLY
+Ludology lab PC visual studio individual components: (some of these won't be necessary, additional components are fine)
+
+.NET
+- .NET 6.0 Runtime (Long Term Support)
+- .NET 7.0 Runtime
+- .NET Framework 4.6.2 targeting pack
+- .NET Framework 4.7.1 targeting pack
+- .NET Framework 4.7.2 targeting pack
+- .NET Framework 4.8 SDK
+- .NET Framework 4.8 targeting pack
+- .NET Native
+- .NET SDK
+- MLNET Model Builder
+
+CLOUD, DATABASE, AND SERVER
+- CLR data types for SQL Server
+
+CODE TOOLS
+- ClickOnce Publishing
+- Developer Analytics tools
+- NuGet package manager
+- Text Template Transformation
+
+COMPILERS, BUILD TOOLS, AND RUNTIMES
+- C# and Visual Basic Roslyn Compilers
+- C++ 2022 Redistributable Update
+- C++ CMake tools for Windows
+- MSBuild
+- MSVC v143 - VS 2022 C++ ARM64 build tools (Latest)
+- MSVC v143 - VS 2022 C++ x64/x86 build tools (Latest)
+- MSVC v143 - VS 2022 C++ x64/x86 build tools (v14.33-17.3)
+- Python 3 64-bit (3.9.7)
+
+DEBUGGING AND TESTING
+- .NET profiling tools
+- C++ AddressSanitizer
+- Just-In-Time debugger
+- Test Adapter for Boost.Test
+- Test Adapter for Google Test
+
+DEVELOPMENT ACTIVITIES
+- C# and Visual Basic
+- C++ CMake tools for Linux
+- C++ core features
+- C++ for Linux Development
+- Embedded and IoT tools
+- F# language support
+- IntelliCode
+- JavaScript and TypeScript language support
+- Live Share
+
+GAMES AND GRAPHICS
+- Graphics debugger and GPU profiler for DirectX
+- IDE support for Unreal Engine
+- Image and 3D model editors
+- Unity Hub
+- Visual Studio Tools for Unity
+
+SDKS, LIBRARIES, AND FRAMEWORKS
+- C++ ATL for latest v143 build tools (x86 & x64)
+- Entity Framework 6 tools
+- TypeScript Server
+- Windows 11 SDK (10.0.22000.0)
+- Windows 11 SDK (10.0.22621.0)
+- Windows Universal C Runtime
+
