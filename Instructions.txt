@@ -1,0 +1,4 @@
+Regenarate projects, and build from the visual studio file before opening.
+
+1 Key - Teleport mannequin to level design
+2 Key - Teleport mannequin to test area (spawn location)
