@@ -1,0 +1,33 @@
+﻿  Running UnrealBuildTool: dotnet "..\..\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" ExperimentalEditor Win64 Development -Project="G:\AgilePanguinSquad\Project\200223\Experimental\Experimental.uproject" -WaitMutex -FromMsBuild
+  Log file: C:\Users\acole\AppData\Local\UnrealBuildTool\Log.txt
+  Creating makefile for ExperimentalEditor (no existing makefile)
+  Parsing headers for ExperimentalEditor
+    Running Internal UnrealHeaderTool G:\AgilePanguinSquad\Project\200223\Experimental\Experimental.uproject G:\AgilePanguinSquad\Project\200223\Experimental\Intermediate\Build\Win64\ExperimentalEditor\Development\ExperimentalEditor.uhtmanifest -WarningsAsErrors -installed
+  Total of 12 written
+  Reflection code generated for ExperimentalEditor in 1.4379162 seconds
+  Building ExperimentalEditor...
+  Using Visual Studio 2022 14.33.31631 toolchain (G:\vis\VC\Tools\MSVC\14.33.31629) and Windows 10.0.22621.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+  Determining max actions to execute in parallel (8 physical cores, 16 logical cores)
+    Executing up to 8 processes, one per physical core
+  Building 17 actions with 8 processes...
+  [1/17] Resource Default.rc2
+  [2/17] Compile SharedPCH.Engine.ShadowErrors.cpp
+  [3/17] Compile Experimental.cpp
+  [4/17] Compile Experimental.init.gen.cpp
+  [5/17] Compile Pickup_Chair.gen.cpp
+  [6/17] Compile Pickup.gen.cpp
+  [7/17] Compile Interactable.gen.cpp
+  [8/17] Compile Interactable.cpp
+  [9/17] Compile ExperimentalGameMode.gen.cpp
+  [10/17] Compile Pickup_Chair.cpp
+  [11/17] Compile ExperimentalCharacter.gen.cpp
+  [12/17] Compile Pickup.cpp
+  [13/17] Compile ExperimentalGameMode.cpp
+  [14/17] Compile ExperimentalCharacter.cpp
+  [15/17] Link UnrealEditor-Experimental.lib
+     Creating library G:\AgilePanguinSquad\Project\200223\Experimental\Intermediate\Build\Win64\UnrealEditor\Development\Experimental\UnrealEditor-Experimental.lib and object G:\AgilePanguinSquad\Project\200223\Experimental\Intermediate\Build\Win64\UnrealEditor\Development\Experimental\UnrealEditor-Experimental.exp
+  [16/17] Link UnrealEditor-Experimental.dll
+     Creating library G:\AgilePanguinSquad\Project\200223\Experimental\Intermediate\Build\Win64\UnrealEditor\Development\Experimental\UnrealEditor-Experimental.suppressed.lib and object G:\AgilePanguinSquad\Project\200223\Experimental\Intermediate\Build\Win64\UnrealEditor\Development\Experimental\UnrealEditor-Experimental.suppressed.exp
+  [17/17] WriteMetadata ExperimentalEditor.target
+  Total time in Parallel executor: 72.20 seconds
+  Total execution time: 89.95 seconds

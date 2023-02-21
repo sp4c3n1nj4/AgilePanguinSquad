@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "g:\\agilepanguinsquad\\project\\200223\\experimental\\intermediate\\build\\win64\\unrealeditor\\inc\\experimental\\uht\\interactable.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "g:\\agilepanguinsquad\\project\\200223\\experimental\\intermediate\\build\\win64\\experimentaleditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "g:\\agilepanguinsquad\\project\\200223\\experimental\\intermediate\\build\\win64\\unrealeditor\\development\\experimental\\definitions.experimental.h",
+            "g:\\agilepanguinsquad\\project\\200223\\experimental\\source\\experimental\\interactable.h",
+            "g:\\agilepanguinsquad\\project\\200223\\experimental\\intermediate\\build\\win64\\unrealeditor\\inc\\experimental\\uht\\interactable.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
