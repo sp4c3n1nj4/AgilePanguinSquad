@@ -32,6 +32,8 @@ AExperimentalCharacter::AExperimentalCharacter()
 
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
+	FVector NewLocation = FVector(0.f, 0.f, 40.f);
+	GetCapsuleComponent()->SetWorldLocation(NewLocation);
 
 	// Don't rotate when the controller rotates. Let that just affect the camera.
 	bUseControllerRotationPitch = false;
@@ -243,9 +245,21 @@ void AExperimentalCharacter::PauseGame()
 	}
 }
 
+void AExperimentalCharacter::OpenOptions()
+{
+	/*Open options widget here*/
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Options menu widget will open, pause widget will close"));
+}
+
+void AExperimentalCharacter::CloseOptions()
+{
+	/*Close options widget here*/
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Options menu widget will close, pause menu widget will open"));
+}
+
 void AExperimentalCharacter::QuitToMenu()
 {
-	/*Open main menu here*/
+	/*Open main menu level here*/
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Level will close and menu will open"));
 }
 

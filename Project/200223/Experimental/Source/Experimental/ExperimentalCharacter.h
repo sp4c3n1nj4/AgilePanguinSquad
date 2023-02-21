@@ -98,6 +98,12 @@ public:
 	void PauseGame();
 
 	UFUNCTION(BlueprintCallable, Category = "Pause Menu")
+	void OpenOptions();
+
+	UFUNCTION(BlueprintCallable, Category = "Pause Menu")
+	void CloseOptions();
+
+	UFUNCTION(BlueprintCallable, Category = "Pause Menu")
 	void QuitToMenu();
 
 	/*Toggles between inventory and game*/
