@@ -57,6 +57,12 @@ class AExperimentalCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class UInputAction* TestAreaAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	class UInputAction* DecreaseSuspicionAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	class UInputAction* IncreaseSuspicionAction;
+
 public:
 	AExperimentalCharacter();
 
@@ -137,6 +143,8 @@ private:
 	void Interact();
 	void TestArea();
 	void MapArea();
+	void DecreaseSuspicion();
+	void IncreaseSuspicion();
 
 	/*Checks for interactable items directly in front of the player using a linetrace, called on a per tick basis*/
 	void CheckForInteractables();

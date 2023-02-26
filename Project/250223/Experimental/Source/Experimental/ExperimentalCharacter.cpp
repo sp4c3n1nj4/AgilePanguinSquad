@@ -185,6 +185,16 @@ void AExperimentalCharacter::MapArea()
 	Controller->SetControlRotation(MapAreaRotation);
 }
 
+void AExperimentalCharacter::DecreaseSuspicion()
+{
+	suspicionPercentage = suspicionPercentage - 25.f;
+}
+
+void AExperimentalCharacter::IncreaseSuspicion()
+{
+	suspicionPercentage = suspicionPercentage + 25.f;
+}
+
 void AExperimentalCharacter::CheckForInteractables()
 {
 	FVector startTrace = FollowCamera->GetComponentLocation();
@@ -317,6 +327,8 @@ void AExperimentalCharacter::SetupPlayerInputComponent(class UInputComponent* Pl
 		/* Testing only, REMOVE BEFORE DEADLINE*/
 		EnhancedInputComponent->BindAction(TestAreaAction, ETriggerEvent::Triggered, this, &AExperimentalCharacter::TestArea);
 		EnhancedInputComponent->BindAction(MapAreaAction, ETriggerEvent::Triggered, this, &AExperimentalCharacter::MapArea);
+		EnhancedInputComponent->BindAction(DecreaseSuspicionAction, ETriggerEvent::Completed, this, &AExperimentalCharacter::DecreaseSuspicion);
+		EnhancedInputComponent->BindAction(IncreaseSuspicionAction, ETriggerEvent::Completed, this, &AExperimentalCharacter::IncreaseSuspicion);
 
 		/*Pause*/
 		EnhancedInputComponent->BindAction(PauseAction, ETriggerEvent::Started, this, &AExperimentalCharacter::PauseGame);
