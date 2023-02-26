@@ -68,6 +68,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory Functions")
 	float reach;
 
+	/*How close the player needs to be to the pickup*/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory Functions")
+	float suspicionPercentage;
+
 	/*Variable which represents the player not being able to pick up a third object*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory Functions")
 	bool bDeniedText;

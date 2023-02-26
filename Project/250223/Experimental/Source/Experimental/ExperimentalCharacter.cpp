@@ -52,6 +52,7 @@ AExperimentalCharacter::AExperimentalCharacter()
 
 	inventoryLimit = 2;
 	reach = 500.f;
+	suspicionPercentage = 0.f;
 	bDeniedText = false;
 	bIsGamePaused = false;
 
