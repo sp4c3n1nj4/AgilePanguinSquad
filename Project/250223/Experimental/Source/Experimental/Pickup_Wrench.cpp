@@ -44,6 +44,12 @@ void APickup_Wrench::Use_Implementation()
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 1 doesn't need fixing yet"));
 			MyCharacter->usedSlot = NULL;
+			MyCharacter->ToggleInventory();
+			if (MyCharacter->bDeniedText == false)
+			{
+				MyCharacter->bDeniedText = true;
+				GetWorld()->GetTimerManager().SetTimer(TimerHandle, MyCharacter, &AExperimentalCharacter::RemoveDeniedText, 3.0f, false);
+			}
 			return;
 		}
 	}
@@ -65,6 +71,12 @@ void APickup_Wrench::Use_Implementation()
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 2 doesn't need fixing yet"));
 			MyCharacter->usedSlot = NULL;
+			MyCharacter->ToggleInventory();
+			if (MyCharacter->bDeniedText == false)
+			{
+				MyCharacter->bDeniedText = true;
+				GetWorld()->GetTimerManager().SetTimer(TimerHandle, MyCharacter, &AExperimentalCharacter::RemoveDeniedText, 3.0f, false);
+			}
 			return;
 		}
 	}
@@ -72,5 +84,11 @@ void APickup_Wrench::Use_Implementation()
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("You cannot use the wrench here"));
 		MyCharacter->usedSlot = NULL;
+		MyCharacter->ToggleInventory();
+		if (MyCharacter->bDeniedText == false)
+		{
+			MyCharacter->bDeniedText = true;
+			GetWorld()->GetTimerManager().SetTimer(TimerHandle, MyCharacter, &AExperimentalCharacter::RemoveDeniedText, 3.0f, false);
+		}
 	}
 }

@@ -66,6 +66,8 @@ AExperimentalCharacter::AExperimentalCharacter()
 
 bool AExperimentalCharacter::AddItemToInventory(APickup* Item)
 {
+	FTimerHandle TimerHandle;
+
 	if (Item != NULL)
 	{
 		const int32 AvaliableSlot = inventory.Find(nullptr); /*Find first slot with a nullptr in it*/
@@ -81,7 +83,6 @@ bool AExperimentalCharacter::AddItemToInventory(APickup* Item)
 			if (bDeniedText == false)
 			{
 				bDeniedText = true;
-				FTimerHandle TimerHandle;
 				GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &AExperimentalCharacter::RemoveDeniedText, 3.0f, false);
 				return false;
 			}
