@@ -12,6 +12,7 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/GameplayStatics.h"
 #include "EnhancedInputSubsystems.h"
+#include "Pickup_Wrench.h"
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -55,6 +56,9 @@ AExperimentalCharacter::AExperimentalCharacter()
 	suspicionPercentage = 0.f;
 	bDeniedText = false;
 	bIsGamePaused = false;
+	bEngineOverlap_0 = false;
+	bEngineOverlap_1 = false;
+	usedSlot = NULL;
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
@@ -118,9 +122,18 @@ void AExperimentalCharacter::UseItemAtInventorySlot(int32 slot)
 {
 	if (inventory[slot] != NULL)
 	{
+		usedSlot = slot;
 		inventory[slot]->Use_Implementation();
-		inventory[slot] = NULL; /*Deletes the item from inventory once used*/
 	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Cannot use here"));
+	}
+}
+
+void AExperimentalCharacter::DeleteItemAtInventorySlot(int32 slot)
+{
+	inventory[slot] = NULL;
 }
 
 void AExperimentalCharacter::ToggleInventory()
@@ -309,10 +322,6 @@ void AExperimentalCharacter::SetupPlayerInputComponent(class UInputComponent* Pl
 {
 	// Set up action bindings
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent)) {
-		
-		//Jumping
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &ACharacter::Jump);
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
 		
 		/*Interacting*/
 		EnhancedInputComponent->BindAction(ToggleInventoryAction, ETriggerEvent::Completed, this, &AExperimentalCharacter::ToggleInventory);

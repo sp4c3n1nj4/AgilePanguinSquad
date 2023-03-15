@@ -6,16 +6,6 @@
 #include "Kismet/GameplayStatics.h" 
 #include "UObject/ConstructorHelpers.h"
 
-void AExperimentalGameMode::BeginPlay()
-{
-	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
-	
-	if (MyCharacter != nullptr) {
-		/*As soon as the player enters the game, apply hud to the screen*/
-		ApplyHUDChanges();
-	}
-}
-
 AExperimentalGameMode::AExperimentalGameMode()
 {
 	// set default pawn class to our Blueprinted character
@@ -27,6 +17,31 @@ AExperimentalGameMode::AExperimentalGameMode()
 
 	/*Sets default HUD state to ingame*/
 	HUDState = EHUDState::HS_Ingame;
+
+	bEngineBroken_0 = false;
+	bEngineBroken_1 = false;
+	stableNum = 100;
+	maxStableNum = 100;
+}
+
+void AExperimentalGameMode::BeginPlay()
+{
+	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
+
+	if (MyCharacter != nullptr)
+	{
+		ApplyHUDChanges();
+		
+		if (bEngineBroken_0 == false)
+		{
+			EngineTimer_0();
+		}
+
+		if (bEngineBroken_1 == false)
+		{
+			EngineTimer_1();
+		}
+	}
 }
 
 void AExperimentalGameMode::ApplyHUDChanges()
@@ -97,4 +112,50 @@ bool AExperimentalGameMode::ApplyHUD(TSubclassOf<class UUserWidget> WidgetToAppl
 		else return false;
 	}
 	else return false;
+}
+
+void AExperimentalGameMode::EngineTimer_0()
+{
+	FTimerHandle delayHandle;
+	GetWorldTimerManager().SetTimer(delayHandle, this, &AExperimentalGameMode::EngineChance_0, 30.f, false);
+}
+
+void AExperimentalGameMode::EngineTimer_1()
+{
+	FTimerHandle delayHandle;
+	GetWorldTimerManager().SetTimer(delayHandle, this, &AExperimentalGameMode::EngineChance_1, 30.f, false);
+}
+
+void AExperimentalGameMode::EngineChance_0()
+{
+	stateEngine_0 = FMath::RandRange(0, 9);
+
+	if (stateEngine_0 == 0)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 1 is broken"));
+		bEngineBroken_0 = true;
+		stableNum = stableNum - 20;
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Engine 1 remains"));
+		EngineTimer_0();
+	}
+}
+
+void AExperimentalGameMode::EngineChance_1()
+{
+	stateEngine_1 = FMath::RandRange(0, 9);
+
+	if (stateEngine_1 == 0)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 2 is broken"));
+		bEngineBroken_1 = true;
+		stableNum = stableNum - 20;
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Engine 2 remains"));
+		EngineTimer_1();
+	}
 }

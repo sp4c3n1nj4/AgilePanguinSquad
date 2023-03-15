@@ -27,10 +27,6 @@ class AExperimentalCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class UInputMappingContext* DefaultMappingContext;
 
-	/** Jump Input Action */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	class UInputAction* JumpAction;
-
 	/*Toggle inventory input action*/
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class UInputAction* ToggleInventoryAction;
@@ -83,6 +79,12 @@ public:
 	bool bDeniedText;
 
 	bool bIsGamePaused;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	bool bEngineOverlap_0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	bool bEngineOverlap_1;
 
 	/*Adds an item to the inventory*/
 	UFUNCTION(BlueprintPure, Category = "Inventory Functions")
@@ -104,6 +106,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Inventory Functions")
 	void UseItemAtInventorySlot(int32 slot);
 
+	/*Uses the item at a given inventory slot*/
+	UFUNCTION(BlueprintCallable, Category = "Inventory Functions")
+	void DeleteItemAtInventorySlot(int32 slot);
+
 	UFUNCTION(BlueprintCallable, Category = "Pause Menu")
 	void PauseGame();
 
@@ -118,7 +124,16 @@ public:
 
 	/*Toggles between inventory and game*/
 	void ToggleInventory();
-	
+
+	/*The players inventory, represented as a tarray of pickup objects*/
+	UPROPERTY(EditAnywhere)
+	TArray<APickup*>inventory;
+
+	/*Set bDeniedText to false*/
+	void RemoveDeniedText();
+
+	int32 usedSlot;
+
 protected:
 	
 	/** Called for movement input */
@@ -126,9 +141,6 @@ protected:
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
-	
-	/*Set bDeniedText to false*/
-	void RemoveDeniedText();
 
 protected:
 	// APawn interface
@@ -151,10 +163,6 @@ private:
 
 	/*The interactable the player is currently looking at*/
 	AInteractable* currentInteractable;
-
-	/*The players inventory, represented as a tarray of pickup objects*/
-	UPROPERTY(EditAnywhere)
-	TArray<APickup*>inventory;
 
 	/*How many items can be in the inventory*/
 	UPROPERTY(EditAnywhere, Category = "Inventory Functions")

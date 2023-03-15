@@ -37,6 +37,26 @@ public:
 	/*Applies a hud to the screen, returns true if successful, false otherwise*/
 	bool ApplyHUD(TSubclassOf<class UUserWidget> WidgetToApply, bool bShowMouseCursor, bool EnableClickEvents);
 
+	void EngineTimer_0();
+	void EngineTimer_1();
+	void EngineChance_0();
+	void EngineChance_1();
+
+	int stateEngine_0;
+	int stateEngine_1;
+	
+	UPROPERTY(EditAnywhere, Category = "Variables")
+	bool bEngineBroken_0;
+
+	UPROPERTY(EditAnywhere, Category = "Variables")
+	bool bEngineBroken_1;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	int stableNum;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	int maxStableNum;
+
 protected:
 	/*Actual HUD State, can only be used within this class, and not outside*/
 	uint8 HUDState;

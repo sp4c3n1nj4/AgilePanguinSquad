@@ -3,6 +3,7 @@
 #include "Pickup_Wrench.h"
 #include "Kismet/GameplayStatics.h"
 #include "ExperimentalCharacter.h"
+#include "ExperimentalGameMode.h"
 
 APickup_Wrench::APickup_Wrench()
 {
@@ -21,7 +22,55 @@ void APickup_Wrench::BeginPlay()
 /*When item is used*/
 void APickup_Wrench::Use_Implementation()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a wrench: Use_Implementation() IT'S COOL IF YOU'RE SEEING THIS"));
+	AExperimentalGameMode* GM = Cast<AExperimentalGameMode>(GetWorld()->GetAuthGameMode());
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
-	MyCharacter->ToggleInventory();
+	FTimerHandle TimerHandle;
+	
+	if (MyCharacter->bEngineOverlap_0 == true)
+	{
+		if (GM->bEngineBroken_0 == true)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a wrench to fix engine 1"));
+			interactableMesh->SetVisibility(true);
+			interactableMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+			MyCharacter->ToggleInventory();
+			MyCharacter->DeleteItemAtInventorySlot(MyCharacter->usedSlot);
+			GM->stableNum = GM->stableNum + 20;
+			GM->bEngineBroken_0 = false;
+			GM->EngineTimer_0();
+			return;
+		}
+		else
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 1 doesn't need fixing yet"));
+			MyCharacter->usedSlot = NULL;
+			return;
+		}
+	}
+	if (MyCharacter->bEngineOverlap_1 == true)
+	{
+		if (GM->bEngineBroken_1 == true)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a wrench to fix engine 2"));
+			interactableMesh->SetVisibility(true);
+			interactableMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+			MyCharacter->ToggleInventory();
+			MyCharacter->DeleteItemAtInventorySlot(MyCharacter->usedSlot);
+			GM->stableNum = GM->stableNum + 20;
+			GM->bEngineBroken_1 = false;
+			GM->EngineTimer_1();
+			return;
+		}
+		else
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 2 doesn't need fixing yet"));
+			MyCharacter->usedSlot = NULL;
+			return;
+		}
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("You cannot use the wrench here"));
+		MyCharacter->usedSlot = NULL;
+	}
 }
