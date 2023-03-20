@@ -130,7 +130,7 @@ void AExperimentalGameMode::EngineChance_0()
 {
 	stateEngine_0 = FMath::RandRange(0, 9);
 
-	if (stateEngine_0 == 0)
+	if (stateEngine_0 > 0)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 1 is broken"));
 		bEngineBroken_0 = true;
