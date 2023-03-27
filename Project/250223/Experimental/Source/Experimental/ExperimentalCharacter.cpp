@@ -47,14 +47,13 @@ AExperimentalCharacter::AExperimentalCharacter()
 	// instead of recompiling to adjust them
 	GetCharacterMovement()->JumpZVelocity = 700.f;
 	GetCharacterMovement()->AirControl = 0.35f;
-	GetCharacterMovement()->MaxWalkSpeed = 500.f;
 	GetCharacterMovement()->MinAnalogWalkSpeed = 20.f;
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
 
 	inventoryLimit = 2;
 	reach = 500.f;
 	suspicionPercentage = 0.f;
-	bDeniedText = false;
+	bAlertText = false;
 	bIsGamePaused = false;
 	bEngineOverlap_0 = false;
 	bEngineOverlap_1 = false;
@@ -67,6 +66,7 @@ AExperimentalCharacter::AExperimentalCharacter()
 bool AExperimentalCharacter::AddItemToInventory(APickup* Item)
 {
 	FTimerHandle TimerHandle;
+	AExperimentalGameMode* GM = Cast<AExperimentalGameMode>(GetWorld()->GetAuthGameMode());
 
 	if (Item != NULL)
 	{
@@ -79,11 +79,12 @@ bool AExperimentalCharacter::AddItemToInventory(APickup* Item)
 		}
 		else
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("You can't carry any more items!"));
-			if (bDeniedText == false)
+			GM->alertText = "You can't carry any more items";
+			GM->bAlertGreen = false;
+			if (bAlertText == false)
 			{
-				bDeniedText = true;
-				GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &AExperimentalCharacter::RemoveDeniedText, 3.0f, false);
+				bAlertText = true;
+				GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &AExperimentalCharacter::RemoveAlertText, 3.0f, false);
 				return false;
 			}
 			return false;
@@ -141,10 +142,9 @@ void AExperimentalCharacter::ToggleInventory()
 {
 	APlayerController* MyController = GetWorld()->GetFirstPlayerController(); /* Controller REF*/
 	ACharacter* Character = UGameplayStatics::GetPlayerCharacter(this, 0); /* Character REF*/
-
-	/*Check players hud state, if inventory is open, then close it, otherwise open inventory*/
 	AExperimentalGameMode* GM = Cast<AExperimentalGameMode>(GetWorld()->GetAuthGameMode());
 
+	/*Check players hud state, if inventory is open, then close it, otherwise open inventory*/
 	if (GM->GetHUDState() == GM->HS_Ingame)
 	{
 		GM->ChangeHUDState(GM->HS_Inventory);
@@ -307,6 +307,8 @@ void AExperimentalCharacter::BeginPlay()
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
 		}
 	}
+
+	GetCharacterMovement()->MaxWalkSpeed = 300.f;
 }
 
 void AExperimentalCharacter::Tick(float DeltaTime)
@@ -381,7 +383,11 @@ void AExperimentalCharacter::Look(const FInputActionValue& Value)
 	}
 }
 
-void AExperimentalCharacter::RemoveDeniedText()
+void AExperimentalCharacter::RemoveAlertText()
 {
-	bDeniedText = false;
+	AExperimentalGameMode* GM = Cast<AExperimentalGameMode>(GetWorld()->GetAuthGameMode());
+	
+	bAlertText = false;
+	GM->alertText = NULL;
+	GM->bAlertGreen = NULL;
 }

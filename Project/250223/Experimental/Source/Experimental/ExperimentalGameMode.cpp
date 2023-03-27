@@ -42,6 +42,9 @@ void AExperimentalGameMode::BeginPlay()
 			EngineTimer_1();
 		}
 	}
+
+	alertText = NULL;
+	bAlertGreen = NULL;
 }
 
 void AExperimentalGameMode::ApplyHUDChanges()
@@ -128,34 +131,49 @@ void AExperimentalGameMode::EngineTimer_1()
 
 void AExperimentalGameMode::EngineChance_0()
 {
+	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	stateEngine_0 = FMath::RandRange(0, 9);
+	FTimerHandle TimerHandle;
 
 	if (stateEngine_0 > 0)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 1 is broken"));
+		alertText = "Engine 1 is broken";
+		bAlertGreen = false;
+		if (MyCharacter->bAlertText == false)
+		{
+			MyCharacter->bAlertText = true;
+			GetWorld()->GetTimerManager().SetTimer(TimerHandle, MyCharacter, &AExperimentalCharacter::RemoveAlertText, 3.0f, false);
+		}
 		bEngineBroken_0 = true;
 		stableNum = stableNum - 20;
 	}
 	else
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Engine 1 remains"));
 		EngineTimer_0();
 	}
 }
 
 void AExperimentalGameMode::EngineChance_1()
 {
+	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	stateEngine_1 = FMath::RandRange(0, 9);
+	FTimerHandle TimerHandle;
 
 	if (stateEngine_1 == 0)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 2 is broken"));
+		alertText = "Enigne 2 is broken";
+		bAlertGreen = false;
+		if (MyCharacter->bAlertText == false)
+		{
+			MyCharacter->bAlertText = true;
+			GetWorld()->GetTimerManager().SetTimer(TimerHandle, MyCharacter, &AExperimentalCharacter::RemoveAlertText, 3.0f, false);
+		}
 		bEngineBroken_1 = true;
 		stableNum = stableNum - 20;
 	}
 	else
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Engine 2 remains"));
 		EngineTimer_1();
 	}
 }

@@ -30,7 +30,13 @@ void APickup_Wrench::Use_Implementation()
 	{
 		if (GM->bEngineBroken_0 == true)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a wrench to fix engine 1"));
+			GM->alertText = "You used a wrench to fix engine 1";
+			GM->bAlertGreen = true;
+			if (MyCharacter->bAlertText == false)
+			{
+				MyCharacter->bAlertText = true;
+				GetWorld()->GetTimerManager().SetTimer(TimerHandle, MyCharacter, &AExperimentalCharacter::RemoveAlertText, 3.0f, false);
+			}
 			interactableMesh->SetVisibility(true);
 			interactableMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 			MyCharacter->ToggleInventory();
@@ -42,13 +48,14 @@ void APickup_Wrench::Use_Implementation()
 		}
 		else
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 1 doesn't need fixing yet"));
+			GM->alertText = "Engine 1 doesn't need fixing yet";
+			GM->bAlertGreen = false;
 			MyCharacter->usedSlot = NULL;
 			MyCharacter->ToggleInventory();
-			if (MyCharacter->bDeniedText == false)
+			if (MyCharacter->bAlertText == false)
 			{
-				MyCharacter->bDeniedText = true;
-				GetWorld()->GetTimerManager().SetTimer(TimerHandle, MyCharacter, &AExperimentalCharacter::RemoveDeniedText, 3.0f, false);
+				MyCharacter->bAlertText = true;
+				GetWorld()->GetTimerManager().SetTimer(TimerHandle, MyCharacter, &AExperimentalCharacter::RemoveAlertText, 3.0f, false);
 			}
 			return;
 		}
@@ -57,7 +64,13 @@ void APickup_Wrench::Use_Implementation()
 	{
 		if (GM->bEngineBroken_1 == true)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a wrench to fix engine 2"));
+			GM->alertText = "You used a wrench to fix engine 2";
+			GM->bAlertGreen = true;
+			if (MyCharacter->bAlertText == false)
+			{
+				MyCharacter->bAlertText = true;
+				GetWorld()->GetTimerManager().SetTimer(TimerHandle, MyCharacter, &AExperimentalCharacter::RemoveAlertText, 3.0f, false);
+			}
 			interactableMesh->SetVisibility(true);
 			interactableMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 			MyCharacter->ToggleInventory();
@@ -69,26 +82,28 @@ void APickup_Wrench::Use_Implementation()
 		}
 		else
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 2 doesn't need fixing yet"));
+			GM->alertText = "Engine 2 doesn't need fixing yet";
+			GM->bAlertGreen = false;
 			MyCharacter->usedSlot = NULL;
 			MyCharacter->ToggleInventory();
-			if (MyCharacter->bDeniedText == false)
+			if (MyCharacter->bAlertText == false)
 			{
-				MyCharacter->bDeniedText = true;
-				GetWorld()->GetTimerManager().SetTimer(TimerHandle, MyCharacter, &AExperimentalCharacter::RemoveDeniedText, 3.0f, false);
+				MyCharacter->bAlertText = true;
+				GetWorld()->GetTimerManager().SetTimer(TimerHandle, MyCharacter, &AExperimentalCharacter::RemoveAlertText, 3.0f, false);
 			}
 			return;
 		}
 	}
 	else
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("You cannot use the wrench here"));
+		GM->alertText = "You cannot use the wrench here";
+		GM->bAlertGreen = false;
 		MyCharacter->usedSlot = NULL;
 		MyCharacter->ToggleInventory();
-		if (MyCharacter->bDeniedText == false)
+		if (MyCharacter->bAlertText == false)
 		{
-			MyCharacter->bDeniedText = true;
-			GetWorld()->GetTimerManager().SetTimer(TimerHandle, MyCharacter, &AExperimentalCharacter::RemoveDeniedText, 3.0f, false);
+			MyCharacter->bAlertText = true;
+			GetWorld()->GetTimerManager().SetTimer(TimerHandle, MyCharacter, &AExperimentalCharacter::RemoveAlertText, 3.0f, false);
 		}
 	}
 }

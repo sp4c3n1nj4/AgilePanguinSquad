@@ -57,6 +57,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
 	int maxStableNum;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	FString alertText;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	bool bAlertGreen;
+
 protected:
 	/*Actual HUD State, can only be used within this class, and not outside*/
 	uint8 HUDState;

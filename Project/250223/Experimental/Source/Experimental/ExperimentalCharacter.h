@@ -76,7 +76,7 @@ public:
 
 	/*Variable which represents the player not being able to pick up a third object*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory Functions")
-	bool bDeniedText;
+	bool bAlertText;
 
 	bool bIsGamePaused;
 	
@@ -129,8 +129,8 @@ public:
 	UPROPERTY(EditAnywhere)
 	TArray<APickup*>inventory;
 
-	/*Set bDeniedText to false*/
-	void RemoveDeniedText();
+	/*Set bAlertText to false*/
+	void RemoveAlertText();
 
 	int32 usedSlot;
 
