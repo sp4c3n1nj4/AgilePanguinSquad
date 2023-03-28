@@ -11,6 +11,7 @@ APickup_FireExtinguisher::APickup_FireExtinguisher()
 	itemName = "Fire Extinguisher";
 	itemAction = "pick up";
 	itemDescription = "This is a fire extinguisher";
+	uses = 3;
 }
 
 void APickup_FireExtinguisher::BeginPlay()

@@ -20,8 +20,10 @@ AExperimentalGameMode::AExperimentalGameMode()
 
 	bEngineBroken_0 = false;
 	bEngineBroken_1 = false;
+	bSteeringBroken = false;
 	stableNum = 100;
 	maxStableNum = 100;
+	bToolboxEquipped = false;
 }
 
 void AExperimentalGameMode::BeginPlay()
@@ -41,10 +43,12 @@ void AExperimentalGameMode::BeginPlay()
 		{
 			EngineTimer_1();
 		}
-	}
 
-	alertText = NULL;
-	bAlertGreen = NULL;
+		if (bSteeringBroken == false)
+		{
+			SteeringTimer();
+		}
+	}
 }
 
 void AExperimentalGameMode::ApplyHUDChanges()
@@ -129,27 +133,48 @@ void AExperimentalGameMode::EngineTimer_1()
 	GetWorldTimerManager().SetTimer(delayHandle, this, &AExperimentalGameMode::EngineChance_1, 30.f, false);
 }
 
+void AExperimentalGameMode::SteeringTimer()
+{
+	FTimerHandle delayHandle;
+	GetWorldTimerManager().SetTimer(delayHandle, this, &AExperimentalGameMode::SteeringChance, 30.f, false);
+}
+
 void AExperimentalGameMode::EngineChance_0()
 {
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	stateEngine_0 = FMath::RandRange(0, 9);
 	FTimerHandle TimerHandle;
 
-	if (stateEngine_0 > 0)
+	if (bToolboxEquipped == true)
 	{
-		alertText = "Engine 1 is broken";
-		bAlertGreen = false;
-		if (MyCharacter->bAlertText == false)
+		if (stateEngine_0 < 4)
 		{
-			MyCharacter->bAlertText = true;
-			GetWorld()->GetTimerManager().SetTimer(TimerHandle, MyCharacter, &AExperimentalCharacter::RemoveAlertText, 3.0f, false);
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 1 is broken"));
+			bEngineBroken_0 = true;
+			stableNum = stableNum - 20;
+			return;
 		}
-		bEngineBroken_0 = true;
-		stableNum = stableNum - 20;
+
+		else
+		{
+			EngineTimer_0();
+			return;
+		}
 	}
+
 	else
 	{
-		EngineTimer_0();
+		if (stateEngine_0 < 2)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 1 is broken"));
+			bEngineBroken_0 = true;
+			stableNum = stableNum - 20;
+			return;
+		}
+		else
+		{
+			EngineTimer_0();
+		}
 	}
 }
 
@@ -159,21 +184,76 @@ void AExperimentalGameMode::EngineChance_1()
 	stateEngine_1 = FMath::RandRange(0, 9);
 	FTimerHandle TimerHandle;
 
-	if (stateEngine_1 == 0)
+	if (bToolboxEquipped == true)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 2 is broken"));
-		alertText = "Enigne 2 is broken";
-		bAlertGreen = false;
-		if (MyCharacter->bAlertText == false)
+		if (stateEngine_1 < 4)
 		{
-			MyCharacter->bAlertText = true;
-			GetWorld()->GetTimerManager().SetTimer(TimerHandle, MyCharacter, &AExperimentalCharacter::RemoveAlertText, 3.0f, false);
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 2 is broken"));
+			bEngineBroken_1 = true;
+			stableNum = stableNum - 20;
+			return;
 		}
-		bEngineBroken_1 = true;
-		stableNum = stableNum - 20;
+
+		else
+		{
+			EngineTimer_1();
+			return;
+		}
 	}
+
 	else
 	{
-		EngineTimer_1();
+		if (stateEngine_1 < 2)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 2 is broken"));
+			bEngineBroken_1 = true;
+			stableNum = stableNum - 20;
+			return;
+		}
+
+		else
+		{
+			EngineTimer_1();
+		}
+	}
+}
+
+void AExperimentalGameMode::SteeringChance()
+{
+	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
+	stateSteering = FMath::RandRange(0, 9);
+	FTimerHandle TimerHandle;
+
+	if (bToolboxEquipped == true)
+	{
+		if (stateSteering < 4)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Steering is broken"));
+			bSteeringBroken = true;
+			stableNum = stableNum - 20;
+			return;
+		}
+
+		else
+		{
+			SteeringTimer();
+			return;
+		}
+	}
+
+	else
+	{
+		if (stateSteering > 2)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Steering is broken"));
+			bSteeringBroken = true;
+			stableNum = stableNum - 20;
+			return;
+		}
+
+		else
+		{
+			SteeringTimer();
+		}
 	}
 }

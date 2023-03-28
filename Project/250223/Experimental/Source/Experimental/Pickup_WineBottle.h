@@ -1,3 +1,5 @@
+#pragma once
+
 #include "CoreMinimal.h"
 #include "Pickup.h"
 #include "Pickup_WineBottle.generated.h"

@@ -41,6 +41,11 @@ void APickup::Use_Implementation()
 	GLog->Log("Use() from based pickup class : YOU SHOULD NOT BE SEEING THIS");
 }
 
+void APickup::Discard_Implementation()
+{
+	GLog->Log("Discard() from based pickup class : YOU SHOULD NOT BE SEEING THIS");
+}
+
 /*Doesn't destroy the pick up as it needs to be in world for the inventory, 
 however, this will make the pickup invisible, with no physics or collision*/
 void APickup::OnPickedUp()

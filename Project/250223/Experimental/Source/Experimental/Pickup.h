@@ -24,7 +24,9 @@ public:
 	
 	UFUNCTION(BlueprintNativeEvent)
 	void Use();
+
 	virtual void Use_Implementation();
+	virtual void Discard_Implementation();
 	
 	/*Item image*/
 	UPROPERTY(EditAnywhere, Category = "Pickup Properties")

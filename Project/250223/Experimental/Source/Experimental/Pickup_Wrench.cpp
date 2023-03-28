@@ -25,22 +25,13 @@ void APickup_Wrench::Use_Implementation()
 	AExperimentalGameMode* GM = Cast<AExperimentalGameMode>(GetWorld()->GetAuthGameMode());
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	FTimerHandle TimerHandle;
-	
+
 	if (MyCharacter->bEngineOverlap_0 == true)
 	{
 		if (GM->bEngineBroken_0 == true)
 		{
-			GM->alertText = "You used a wrench to fix engine 1";
-			GM->bAlertGreen = true;
-			if (MyCharacter->bAlertText == false)
-			{
-				MyCharacter->bAlertText = true;
-				GetWorld()->GetTimerManager().SetTimer(TimerHandle, MyCharacter, &AExperimentalCharacter::RemoveAlertText, 3.0f, false);
-			}
-			interactableMesh->SetVisibility(true);
-			interactableMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a wrench to fix engine 1"));
 			MyCharacter->ToggleInventory();
-			MyCharacter->DeleteItemAtInventorySlot(MyCharacter->usedSlot);
 			GM->stableNum = GM->stableNum + 20;
 			GM->bEngineBroken_0 = false;
 			GM->EngineTimer_0();
@@ -48,62 +39,61 @@ void APickup_Wrench::Use_Implementation()
 		}
 		else
 		{
-			GM->alertText = "Engine 1 doesn't need fixing yet";
-			GM->bAlertGreen = false;
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("£ngine 1 doesn't need fixing yet"));
 			MyCharacter->usedSlot = NULL;
-			MyCharacter->ToggleInventory();
-			if (MyCharacter->bAlertText == false)
-			{
-				MyCharacter->bAlertText = true;
-				GetWorld()->GetTimerManager().SetTimer(TimerHandle, MyCharacter, &AExperimentalCharacter::RemoveAlertText, 3.0f, false);
-			}
 			return;
 		}
 	}
+
 	if (MyCharacter->bEngineOverlap_1 == true)
 	{
 		if (GM->bEngineBroken_1 == true)
 		{
-			GM->alertText = "You used a wrench to fix engine 2";
-			GM->bAlertGreen = true;
-			if (MyCharacter->bAlertText == false)
-			{
-				MyCharacter->bAlertText = true;
-				GetWorld()->GetTimerManager().SetTimer(TimerHandle, MyCharacter, &AExperimentalCharacter::RemoveAlertText, 3.0f, false);
-			}
-			interactableMesh->SetVisibility(true);
-			interactableMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a wrench to fix engine 2"));
 			MyCharacter->ToggleInventory();
-			MyCharacter->DeleteItemAtInventorySlot(MyCharacter->usedSlot);
 			GM->stableNum = GM->stableNum + 20;
 			GM->bEngineBroken_1 = false;
 			GM->EngineTimer_1();
 			return;
 		}
+
 		else
 		{
-			GM->alertText = "Engine 2 doesn't need fixing yet";
-			GM->bAlertGreen = false;
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 2 doesn't need fixing yet"));
 			MyCharacter->usedSlot = NULL;
-			MyCharacter->ToggleInventory();
-			if (MyCharacter->bAlertText == false)
-			{
-				MyCharacter->bAlertText = true;
-				GetWorld()->GetTimerManager().SetTimer(TimerHandle, MyCharacter, &AExperimentalCharacter::RemoveAlertText, 3.0f, false);
-			}
 			return;
 		}
 	}
-	else
+
+	if (MyCharacter->bSteeringOverlap == true)
 	{
-		GM->alertText = "You cannot use the wrench here";
-		GM->bAlertGreen = false;
-		MyCharacter->usedSlot = NULL;
-		MyCharacter->ToggleInventory();
-		if (MyCharacter->bAlertText == false)
+		if (GM->bSteeringBroken == true)
 		{
-			MyCharacter->bAlertText = true;
-			GetWorld()->GetTimerManager().SetTimer(TimerHandle, MyCharacter, &AExperimentalCharacter::RemoveAlertText, 3.0f, false);
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a wrench to fix steering"));
+			MyCharacter->ToggleInventory();
+			GM->stableNum = GM->stableNum + 20;
+			GM->bSteeringBroken = false;
+			GM->SteeringTimer();
+			return;
+		}
+
+		else
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Steering doesn't need fixing yet"));
+			MyCharacter->usedSlot = NULL;
+			return;
 		}
 	}
+
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("You can't use the wrench here"));
+		MyCharacter->usedSlot = NULL;
+	}
+}
+
+void APickup_Wrench::Discard_Implementation()
+{
+	interactableMesh->SetVisibility(true);
+	interactableMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 }

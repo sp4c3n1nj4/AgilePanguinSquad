@@ -39,17 +39,23 @@ public:
 
 	void EngineTimer_0();
 	void EngineTimer_1();
+	void SteeringTimer();
 	void EngineChance_0();
 	void EngineChance_1();
+	void SteeringChance();
 
 	int stateEngine_0;
 	int stateEngine_1;
+	int stateSteering;
 	
 	UPROPERTY(EditAnywhere, Category = "Variables")
 	bool bEngineBroken_0;
 
 	UPROPERTY(EditAnywhere, Category = "Variables")
 	bool bEngineBroken_1;
+
+	UPROPERTY(EditAnywhere, Category = "Variables")
+	bool bSteeringBroken;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
 	int stableNum;
@@ -57,11 +63,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
 	int maxStableNum;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
-	FString alertText;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
-	bool bAlertGreen;
+	bool bToolboxEquipped;
 
 protected:
 	/*Actual HUD State, can only be used within this class, and not outside*/

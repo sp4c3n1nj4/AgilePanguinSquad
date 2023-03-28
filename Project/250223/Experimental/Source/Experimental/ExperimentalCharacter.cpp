@@ -53,7 +53,6 @@ AExperimentalCharacter::AExperimentalCharacter()
 	inventoryLimit = 2;
 	reach = 500.f;
 	suspicionPercentage = 0.f;
-	bAlertText = false;
 	bIsGamePaused = false;
 	bEngineOverlap_0 = false;
 	bEngineOverlap_1 = false;
@@ -65,9 +64,6 @@ AExperimentalCharacter::AExperimentalCharacter()
 
 bool AExperimentalCharacter::AddItemToInventory(APickup* Item)
 {
-	FTimerHandle TimerHandle;
-	AExperimentalGameMode* GM = Cast<AExperimentalGameMode>(GetWorld()->GetAuthGameMode());
-
 	if (Item != NULL)
 	{
 		const int32 AvaliableSlot = inventory.Find(nullptr); /*Find first slot with a nullptr in it*/
@@ -79,18 +75,12 @@ bool AExperimentalCharacter::AddItemToInventory(APickup* Item)
 		}
 		else
 		{
-			GM->alertText = "You can't carry any more items";
-			GM->bAlertGreen = false;
-			if (bAlertText == false)
-			{
-				bAlertText = true;
-				GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &AExperimentalCharacter::RemoveAlertText, 3.0f, false);
-				return false;
-			}
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("You can't carry any more items"));
 			return false;
 		}
 	}
-	else return false;
+
+	return false;
 }
 
 UTexture2D* AExperimentalCharacter::GetThumbnailAtInventorySlot(int32 slot)
@@ -129,13 +119,22 @@ void AExperimentalCharacter::UseItemAtInventorySlot(int32 slot)
 	}
 	else
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Cannot use here"));
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Use what exactly?"));
 	}
 }
 
 void AExperimentalCharacter::DeleteItemAtInventorySlot(int32 slot)
 {
-	inventory[slot] = NULL;
+	inventory[slot]->Discard_Implementation();
+	if (inventory[slot] != NULL)
+	{
+		inventory[slot] = NULL;
+	}
+	
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Discard what exactly?"));
+	}
 }
 
 void AExperimentalCharacter::ToggleInventory()
@@ -381,13 +380,4 @@ void AExperimentalCharacter::Look(const FInputActionValue& Value)
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
-}
-
-void AExperimentalCharacter::RemoveAlertText()
-{
-	AExperimentalGameMode* GM = Cast<AExperimentalGameMode>(GetWorld()->GetAuthGameMode());
-	
-	bAlertText = false;
-	GM->alertText = NULL;
-	GM->bAlertGreen = NULL;
 }

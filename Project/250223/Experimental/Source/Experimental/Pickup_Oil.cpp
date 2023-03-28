@@ -11,6 +11,7 @@ APickup_Oil::APickup_Oil()
 	itemName = "Oil";
 	itemAction = "pick up";
 	itemDescription = "This is oil";
+	uses = 3;
 }
 
 void APickup_Oil::BeginPlay()

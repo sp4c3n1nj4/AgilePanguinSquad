@@ -86,6 +86,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
 	bool bEngineOverlap_1;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	bool bSteeringOverlap;
+
 	/*Adds an item to the inventory*/
 	UFUNCTION(BlueprintPure, Category = "Inventory Functions")
 	bool AddItemToInventory(APickup* Item);
@@ -128,9 +131,6 @@ public:
 	/*The players inventory, represented as a tarray of pickup objects*/
 	UPROPERTY(EditAnywhere)
 	TArray<APickup*>inventory;
-
-	/*Set bAlertText to false*/
-	void RemoveAlertText();
 
 	int32 usedSlot;
 
