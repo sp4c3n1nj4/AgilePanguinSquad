@@ -132,8 +132,6 @@ public:
 	UPROPERTY(EditAnywhere)
 	TArray<APickup*>inventory;
 
-	int32 usedSlot;
-
 protected:
 	
 	/** Called for movement input */

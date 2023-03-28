@@ -15,6 +15,7 @@ class EXPERIMENTAL_API APickup_Mop : public APickup
 public:
 	APickup_Mop();
 	virtual void Use_Implementation() override;
+	virtual void Discard_Implementation() override;
 
 protected:
 	virtual void BeginPlay();

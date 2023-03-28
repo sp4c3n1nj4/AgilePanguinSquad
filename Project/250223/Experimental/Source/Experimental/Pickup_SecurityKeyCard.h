@@ -15,6 +15,7 @@ class EXPERIMENTAL_API APickup_SecurityKeyCard : public APickup
 public:
 	APickup_SecurityKeyCard();
 	virtual void Use_Implementation() override;
+	virtual void Discard_Implementation() override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
 	int securityLevel;

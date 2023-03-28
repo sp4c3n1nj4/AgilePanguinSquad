@@ -11,6 +11,7 @@ APickup_Pipe::APickup_Pipe()
 	itemName = "Pipe";
 	itemAction = "pick up";
 	itemDescription = "This is a pipe";
+	uses = NULL;
 }
 
 void APickup_Pipe::BeginPlay()
@@ -24,4 +25,10 @@ void APickup_Pipe::Use_Implementation()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a pipe: Use_Implementation() IT'S COOL IF YOU'RE SEEING THIS"));
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	MyCharacter->ToggleInventory();
+}
+
+void APickup_Pipe::Discard_Implementation()
+{
+	interactableMesh->SetVisibility(true);
+	interactableMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 }

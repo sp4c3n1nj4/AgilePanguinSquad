@@ -11,6 +11,7 @@ APickup_Knife::APickup_Knife()
 	itemName = "Knife";
 	itemAction = "pick up";
 	itemDescription = "This is a knife";
+	uses = NULL;
 }
 
 void APickup_Knife::BeginPlay()
@@ -24,4 +25,10 @@ void APickup_Knife::Use_Implementation()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a knife: Use_Implementation() IT'S COOL IF YOU'RE SEEING THIS"));
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	MyCharacter->ToggleInventory();
+}
+
+void APickup_Knife::Discard_Implementation()
+{
+	interactableMesh->SetVisibility(true);
+	interactableMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 }

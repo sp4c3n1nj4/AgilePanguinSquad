@@ -11,6 +11,7 @@ APickup_Mop::APickup_Mop()
 	itemName = "Mop";
 	itemAction = "pick up";
 	itemDescription = "This is a mop";
+	uses = NULL;
 }
 
 void APickup_Mop::BeginPlay()
@@ -24,4 +25,10 @@ void APickup_Mop::Use_Implementation()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a mop: Use_Implementation() IT'S COOL IF YOU'RE SEEING THIS"));
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	MyCharacter->ToggleInventory();
+}
+
+void APickup_Mop::Discard_Implementation()
+{
+	interactableMesh->SetVisibility(true);
+	interactableMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 }

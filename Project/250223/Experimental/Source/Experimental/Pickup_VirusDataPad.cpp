@@ -11,6 +11,7 @@ APickup_VirusDataPad::APickup_VirusDataPad()
 	itemName = "Virus Data Pad";
 	itemAction = "pick up";
 	itemDescription = "This is a virus data pad";
+	uses = 1;
 }
 
 void APickup_VirusDataPad::BeginPlay()
@@ -24,4 +25,10 @@ void APickup_VirusDataPad::Use_Implementation()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a virus data pad: Use_Implementation() IT'S COOL IF YOU'RE SEEING THIS"));
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	MyCharacter->ToggleInventory();
+}
+
+void APickup_VirusDataPad::Discard_Implementation()
+{
+	interactableMesh->SetVisibility(true);
+	interactableMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 }

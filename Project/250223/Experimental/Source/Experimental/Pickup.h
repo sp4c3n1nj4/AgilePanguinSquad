@@ -42,6 +42,8 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Pickup Properties")
 	FString itemDescription;
 
+	int uses;
+
 	/*This is called when item is picked up and needs to be cleaned up from the level*/
 	void OnPickedUp();
 };

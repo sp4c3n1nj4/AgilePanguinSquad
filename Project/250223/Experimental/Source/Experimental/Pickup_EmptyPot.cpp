@@ -11,6 +11,7 @@ APickup_EmptyPot::APickup_EmptyPot()
 	itemName = "Empty Pot";
 	itemAction = "pick up";
 	itemDescription = "This is an empty pot";
+	uses = 1;
 }
 
 void APickup_EmptyPot::BeginPlay()
@@ -24,4 +25,10 @@ void APickup_EmptyPot::Use_Implementation()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used an empty pot: Use_Implementation() IT'S COOL IF YOU'RE SEEING THIS"));
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	MyCharacter->ToggleInventory();
+}
+
+void APickup_EmptyPot::Discard_Implementation()
+{
+	interactableMesh->SetVisibility(true);
+	interactableMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 }

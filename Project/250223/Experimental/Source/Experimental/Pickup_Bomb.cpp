@@ -12,6 +12,7 @@ APickup_Bomb::APickup_Bomb()
 	itemName = "Bomb";
 	itemAction = "pick up";
 	itemDescription = "This is a bomb";
+	uses = 1;
 }
 
 void APickup_Bomb::BeginPlay()
@@ -25,4 +26,10 @@ void APickup_Bomb::Use_Implementation()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a bomb: Use_Implementation() IT'S COOL IF YOU'RE SEEING THIS"));
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	MyCharacter->ToggleInventory();
+}
+
+void APickup_Bomb::Discard_Implementation()
+{
+	interactableMesh->SetVisibility(true);
+	interactableMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 }

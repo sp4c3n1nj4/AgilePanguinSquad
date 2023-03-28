@@ -56,7 +56,6 @@ AExperimentalCharacter::AExperimentalCharacter()
 	bIsGamePaused = false;
 	bEngineOverlap_0 = false;
 	bEngineOverlap_1 = false;
-	usedSlot = NULL;
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
@@ -114,8 +113,14 @@ void AExperimentalCharacter::UseItemAtInventorySlot(int32 slot)
 {
 	if (inventory[slot] != NULL)
 	{
-		usedSlot = slot;
 		inventory[slot]->Use_Implementation();
+		if (inventory[slot]->uses != NULL)
+		{
+			if (inventory[slot]->uses == 0)
+			{
+				inventory[slot] = NULL;
+			}
+		}
 	}
 	else
 	{

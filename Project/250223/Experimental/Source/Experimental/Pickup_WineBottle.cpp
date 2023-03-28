@@ -11,6 +11,7 @@ APickup_WineBottle::APickup_WineBottle()
 	itemName = "Wine Bottle";
 	itemAction = "pick up";
 	itemDescription = "This is a wine bottle";
+	uses = 1;
 }
 
 void APickup_WineBottle::BeginPlay()
@@ -24,4 +25,10 @@ void APickup_WineBottle::Use_Implementation()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a wine bottle: Use_Implementation() IT'S COOL IF YOU'RE SEEING THIS"));
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	MyCharacter->ToggleInventory();
+}
+
+void APickup_WineBottle::Discard_Implementation()
+{
+	interactableMesh->SetVisibility(true);
+	interactableMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 }

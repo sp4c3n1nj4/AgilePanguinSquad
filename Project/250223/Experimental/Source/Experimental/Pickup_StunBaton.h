@@ -15,6 +15,7 @@ class EXPERIMENTAL_API APickup_StunBaton : public APickup
 public:
 	APickup_StunBaton();
 	virtual void Use_Implementation() override;
+	virtual void Discard_Implementation() override;
 
 protected:
 	virtual void BeginPlay();

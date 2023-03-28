@@ -18,12 +18,10 @@ AExperimentalGameMode::AExperimentalGameMode()
 	/*Sets default HUD state to ingame*/
 	HUDState = EHUDState::HS_Ingame;
 
-	bEngineBroken_0 = false;
-	bEngineBroken_1 = false;
-	bSteeringBroken = false;
-	stableNum = 100;
-	maxStableNum = 100;
-	bToolboxEquipped = false;
+	bEngineBroken_0, bEngineBroken_1, bSteeringBroken, bO2RefreshBroken, bO2H2OStorageBroken, bFuelStorageBroken, bBridgeBroken, bStaffMainBroken, 
+	bDOSSBroken = false;
+	stableNum, maxStableNum = 100;
+	chanceNum = 20;
 }
 
 void AExperimentalGameMode::BeginPlay()
@@ -37,6 +35,13 @@ void AExperimentalGameMode::BeginPlay()
 		if (bEngineBroken_0 == false)
 		{
 			EngineTimer_0();
+
+		}
+
+		else
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 1 is broken"));
+			DecreaseStable();
 		}
 
 		if (bEngineBroken_1 == false)
@@ -44,9 +49,87 @@ void AExperimentalGameMode::BeginPlay()
 			EngineTimer_1();
 		}
 
+		else
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 2 is broken"));
+			DecreaseStable();
+		}
+
 		if (bSteeringBroken == false)
 		{
 			SteeringTimer();
+		}
+
+		else
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Steering is broken"));
+			DecreaseStable();
+		}
+
+		if (bO2RefreshBroken == false)
+		{
+			O2RefreshTimer();
+		}
+
+		else
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Oxygen refresher is broken"));
+			DecreaseStable();
+		}
+
+		if (bO2H2OStorageBroken == false)
+		{
+			O2H2OStorageTimer();
+		}
+
+		else
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Oxygen/Water storage is broken"));
+			DecreaseStable();
+		}
+
+		if (bFuelStorageBroken == false)
+		{
+			FuelStorageTimer();
+		}
+
+		else
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Fuel storage is broken"));
+			DecreaseStable();
+		}
+
+		if (bBridgeBroken == false)
+		{
+			BridgeTimer();
+		}
+
+		else
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Bridge is broken"));
+			DecreaseStable();
+		}
+
+		if (bStaffMainBroken == false)
+		{
+			StaffMainTimer();
+		}
+
+		else
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Staff maintenance is broken"));
+			DecreaseStable();
+		}
+
+		if (bDOSSBroken == false)
+		{
+			DOSSTimer();
+		}
+
+		else
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("DOSS is broken"));
+			DecreaseStable();
 		}
 	}
 }
@@ -121,6 +204,16 @@ bool AExperimentalGameMode::ApplyHUD(TSubclassOf<class UUserWidget> WidgetToAppl
 	else return false;
 }
 
+void AExperimentalGameMode::AddStable()
+{
+	stableNum = stableNum + 10;
+}
+
+void AExperimentalGameMode::DecreaseStable()
+{
+	stableNum = stableNum - 10;
+}
+
 void AExperimentalGameMode::EngineTimer_0()
 {
 	FTimerHandle delayHandle;
@@ -139,42 +232,60 @@ void AExperimentalGameMode::SteeringTimer()
 	GetWorldTimerManager().SetTimer(delayHandle, this, &AExperimentalGameMode::SteeringChance, 30.f, false);
 }
 
+void AExperimentalGameMode::O2RefreshTimer()
+{
+	FTimerHandle delayHandle;
+	GetWorldTimerManager().SetTimer(delayHandle, this, &AExperimentalGameMode::O2RefreshChance, 30.f, false);
+}
+
+void AExperimentalGameMode::O2H2OStorageTimer()
+{
+	FTimerHandle delayHandle;
+	GetWorldTimerManager().SetTimer(delayHandle, this, &AExperimentalGameMode::O2H2OStorageChance, 30.f, false);
+}
+
+void AExperimentalGameMode::FuelStorageTimer()
+{
+	FTimerHandle delayHandle;
+	GetWorldTimerManager().SetTimer(delayHandle, this, &AExperimentalGameMode::FuelStorageChance, 30.f, false);
+}
+
+void AExperimentalGameMode::BridgeTimer()
+{
+	FTimerHandle delayHandle;
+	GetWorldTimerManager().SetTimer(delayHandle, this, &AExperimentalGameMode::BridgeChance, 30.f, false);
+}
+
+void AExperimentalGameMode::StaffMainTimer()
+{
+	FTimerHandle delayHandle;
+	GetWorldTimerManager().SetTimer(delayHandle, this, &AExperimentalGameMode::StaffMainChance, 30.f, false);
+}
+
+void AExperimentalGameMode::DOSSTimer()
+{
+	FTimerHandle delayHandle;
+	GetWorldTimerManager().SetTimer(delayHandle, this, &AExperimentalGameMode::DOSSChance, 30.f, false);
+}
+
 void AExperimentalGameMode::EngineChance_0()
 {
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	stateEngine_0 = FMath::RandRange(0, 9);
 	FTimerHandle TimerHandle;
 
-	if (bToolboxEquipped == true)
+	if (stateEngine_0 < chanceNum)
 	{
-		if (stateEngine_0 < 4)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 1 is broken"));
-			bEngineBroken_0 = true;
-			stableNum = stableNum - 20;
-			return;
-		}
-
-		else
-		{
-			EngineTimer_0();
-			return;
-		}
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 1 is broken"));
+		bEngineBroken_0 = true;
+		DecreaseStable();
+		return;
 	}
 
 	else
 	{
-		if (stateEngine_0 < 2)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 1 is broken"));
-			bEngineBroken_0 = true;
-			stableNum = stableNum - 20;
-			return;
-		}
-		else
-		{
-			EngineTimer_0();
-		}
+		EngineTimer_0();
+		return;
 	}
 }
 
@@ -184,37 +295,18 @@ void AExperimentalGameMode::EngineChance_1()
 	stateEngine_1 = FMath::RandRange(0, 9);
 	FTimerHandle TimerHandle;
 
-	if (bToolboxEquipped == true)
+	if (stateEngine_1 < chanceNum)
 	{
-		if (stateEngine_1 < 4)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 2 is broken"));
-			bEngineBroken_1 = true;
-			stableNum = stableNum - 20;
-			return;
-		}
-
-		else
-		{
-			EngineTimer_1();
-			return;
-		}
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 2 is broken"));
+		bEngineBroken_1 = true;
+		DecreaseStable();
+		return;
 	}
 
 	else
 	{
-		if (stateEngine_1 < 2)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 2 is broken"));
-			bEngineBroken_1 = true;
-			stableNum = stableNum - 20;
-			return;
-		}
-
-		else
-		{
-			EngineTimer_1();
-		}
+		EngineTimer_1();
+		return;
 	}
 }
 
@@ -224,36 +316,143 @@ void AExperimentalGameMode::SteeringChance()
 	stateSteering = FMath::RandRange(0, 9);
 	FTimerHandle TimerHandle;
 
-	if (bToolboxEquipped == true)
+	if (stateSteering < chanceNum)
 	{
-		if (stateSteering < 4)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Steering is broken"));
-			bSteeringBroken = true;
-			stableNum = stableNum - 20;
-			return;
-		}
-
-		else
-		{
-			SteeringTimer();
-			return;
-		}
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Steering is broken"));
+		bSteeringBroken = true;
+		DecreaseStable();
+		return;
 	}
 
 	else
 	{
-		if (stateSteering > 2)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Steering is broken"));
-			bSteeringBroken = true;
-			stableNum = stableNum - 20;
-			return;
-		}
+		SteeringTimer();
+		return;
+	}
+}
 
-		else
-		{
-			SteeringTimer();
-		}
+void AExperimentalGameMode::O2RefreshChance()
+{
+	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
+	stateO2Refresh = FMath::RandRange(0, 9);
+	FTimerHandle TimerHandle;
+
+	if (stateO2Refresh < chanceNum)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Oxygen refresher is broken"));
+		bO2RefreshBroken = true;
+		DecreaseStable();
+		return;
+	}
+
+	else
+	{
+		O2RefreshTimer();
+		return;
+	}
+}
+
+void AExperimentalGameMode::O2H2OStorageChance()
+{
+	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
+	stateO2H2OStorage = FMath::RandRange(0, 9);
+	FTimerHandle TimerHandle;
+
+	if (stateO2H2OStorage < chanceNum)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Oxygen/Water Storage is broken"));
+		bO2H2OStorageBroken = true;
+		DecreaseStable();
+		return;
+	}
+
+	else
+	{
+		O2H2OStorageTimer();
+		return;
+	}
+}
+
+void AExperimentalGameMode::FuelStorageChance()
+{
+	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
+	stateFuelStorage = FMath::RandRange(0, 9);
+	FTimerHandle TimerHandle;
+
+	if (stateFuelStorage < chanceNum)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Fuel storage is broken"));
+		bFuelStorageBroken = true;
+		DecreaseStable();
+		return;
+	}
+
+	else
+	{
+		FuelStorageTimer();
+		return;
+	}
+}
+
+void AExperimentalGameMode::BridgeChance()
+{
+	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
+	stateBridge = FMath::RandRange(0, 9);
+	FTimerHandle TimerHandle;
+
+	if (stateBridge < chanceNum)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Bridge is broken"));
+		bBridgeBroken = true;
+		DecreaseStable();
+		return;
+	}
+
+	else
+	{
+		BridgeTimer();
+		return;
+	}
+}
+
+void AExperimentalGameMode::StaffMainChance()
+{
+	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
+	stateStaffMain = FMath::RandRange(0, 9);
+	FTimerHandle TimerHandle;
+
+	if (stateStaffMain < chanceNum)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Staff maintenance is broken"));
+		bStaffMainBroken = true;
+		DecreaseStable();
+		return;
+	}
+
+	else
+	{
+		StaffMainTimer();
+		return;
+	}
+}
+
+void AExperimentalGameMode::DOSSChance()
+{
+	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
+	stateDOSS = FMath::RandRange(0, 9);
+	FTimerHandle TimerHandle;
+
+	if (stateDOSS < chanceNum)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("DOSS is broken"));
+		bDOSSBroken = true;
+		DecreaseStable();
+		return;
+	}
+
+	else
+	{
+		DOSSTimer();
+		return;
 	}
 }

@@ -11,6 +11,7 @@ APickup_StunBaton::APickup_StunBaton()
 	itemName = "Stun Baton";
 	itemAction = "pick up";
 	itemDescription = "This is a stun baton";
+	uses = NULL;
 }
 
 void APickup_StunBaton::BeginPlay()
@@ -24,4 +25,10 @@ void APickup_StunBaton::Use_Implementation()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a stun baton: Use_Implementation() IT'S COOL IF YOU'RE SEEING THIS"));
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	MyCharacter->ToggleInventory();
+}
+
+void APickup_StunBaton::Discard_Implementation()
+{
+	interactableMesh->SetVisibility(true);
+	interactableMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 }

@@ -3,6 +3,7 @@
 #include "Pickup_Lighter.h"
 #include "Kismet/GameplayStatics.h"
 #include "ExperimentalCharacter.h"
+#include "ExperimentalGameMode.h"
 
 APickup_Lighter::APickup_Lighter()
 {
@@ -11,6 +12,7 @@ APickup_Lighter::APickup_Lighter()
 	itemName = "Lighter";
 	itemAction = "pick up";
 	itemDescription = "This is a lighter";
+	uses = NULL;
 }
 
 void APickup_Lighter::BeginPlay()
@@ -21,7 +23,15 @@ void APickup_Lighter::BeginPlay()
 /*When item is used*/
 void APickup_Lighter::Use_Implementation()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a lighter: Use_Implementation() IT'S COOL IF YOU'RE SEEING THIS"));
+	AExperimentalGameMode* GM = Cast<AExperimentalGameMode>(GetWorld()->GetAuthGameMode());
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
+	
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a lighter: Use_Implementation() IT'S COOL IF YOU'RE SEEING THIS"));
 	MyCharacter->ToggleInventory();
+}
+
+void APickup_Lighter::Discard_Implementation()
+{
+	interactableMesh->SetVisibility(true);
+	interactableMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 }

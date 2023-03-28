@@ -15,8 +15,7 @@ class EXPERIMENTAL_API APickup_FireExtinguisher : public APickup
 public:
 	APickup_FireExtinguisher();
 	virtual void Use_Implementation() override;
-
-	int uses;
+	virtual void Discard_Implementation() override;
 
 protected:
 	virtual void BeginPlay();

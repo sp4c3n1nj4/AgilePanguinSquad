@@ -15,6 +15,7 @@ class EXPERIMENTAL_API APickup_Screwdriver : public APickup
 public:
 	APickup_Screwdriver();
 	virtual void Use_Implementation() override;
+	virtual void Discard_Implementation() override;
 
 protected:
 	virtual void BeginPlay();

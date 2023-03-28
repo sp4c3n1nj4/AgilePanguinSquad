@@ -11,6 +11,7 @@ APickup_DuctTape::APickup_DuctTape()
 	itemName = "Duct Tape";
 	itemAction = "pick up";
 	itemDescription = "This is duct tape";
+	uses = 3;
 }
 
 void APickup_DuctTape::BeginPlay()
@@ -24,4 +25,10 @@ void APickup_DuctTape::Use_Implementation()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used duct tape: Use_Implementation() IT'S COOL IF YOU'RE SEEING THIS"));
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	MyCharacter->ToggleInventory();
+}
+
+void APickup_DuctTape::Discard_Implementation()
+{
+	interactableMesh->SetVisibility(true);
+	interactableMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 }

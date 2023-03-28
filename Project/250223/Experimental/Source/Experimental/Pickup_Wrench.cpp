@@ -11,7 +11,8 @@ APickup_Wrench::APickup_Wrench()
 	best to set the thumbnail, & mesh in the editor*/
 	itemName = "Wrench";
 	itemAction = "pick up";
-	itemDescription = "This is a wrench";
+	itemDescription = "A wrench can be used to fix either engine, and the steering. This has infinite usage.";
+	uses = NULL;
 }
 
 void APickup_Wrench::BeginPlay()
@@ -24,7 +25,6 @@ void APickup_Wrench::Use_Implementation()
 {
 	AExperimentalGameMode* GM = Cast<AExperimentalGameMode>(GetWorld()->GetAuthGameMode());
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
-	FTimerHandle TimerHandle;
 
 	if (MyCharacter->bEngineOverlap_0 == true)
 	{
@@ -32,7 +32,7 @@ void APickup_Wrench::Use_Implementation()
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a wrench to fix engine 1"));
 			MyCharacter->ToggleInventory();
-			GM->stableNum = GM->stableNum + 20;
+			GM->AddStable();
 			GM->bEngineBroken_0 = false;
 			GM->EngineTimer_0();
 			return;
@@ -40,7 +40,6 @@ void APickup_Wrench::Use_Implementation()
 		else
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("£ngine 1 doesn't need fixing yet"));
-			MyCharacter->usedSlot = NULL;
 			return;
 		}
 	}
@@ -51,7 +50,7 @@ void APickup_Wrench::Use_Implementation()
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a wrench to fix engine 2"));
 			MyCharacter->ToggleInventory();
-			GM->stableNum = GM->stableNum + 20;
+			GM->AddStable();
 			GM->bEngineBroken_1 = false;
 			GM->EngineTimer_1();
 			return;
@@ -60,7 +59,6 @@ void APickup_Wrench::Use_Implementation()
 		else
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 2 doesn't need fixing yet"));
-			MyCharacter->usedSlot = NULL;
 			return;
 		}
 	}
@@ -71,7 +69,7 @@ void APickup_Wrench::Use_Implementation()
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a wrench to fix steering"));
 			MyCharacter->ToggleInventory();
-			GM->stableNum = GM->stableNum + 20;
+			GM->AddStable();
 			GM->bSteeringBroken = false;
 			GM->SteeringTimer();
 			return;
@@ -80,7 +78,6 @@ void APickup_Wrench::Use_Implementation()
 		else
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Steering doesn't need fixing yet"));
-			MyCharacter->usedSlot = NULL;
 			return;
 		}
 	}
@@ -88,7 +85,6 @@ void APickup_Wrench::Use_Implementation()
 	else
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("You can't use the wrench here"));
-		MyCharacter->usedSlot = NULL;
 	}
 }
 

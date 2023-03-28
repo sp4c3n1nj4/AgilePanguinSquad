@@ -17,8 +17,7 @@ class EXPERIMENTAL_API APickup_PoisonBottle : public APickup
 public:
 	APickup_PoisonBottle();
 	virtual void Use_Implementation() override;
-
-	int uses;
+	virtual void Discard_Implementation() override;
 
 protected:
 	virtual void BeginPlay();

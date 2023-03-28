@@ -11,6 +11,7 @@ APickup_EMP::APickup_EMP()
 	itemName = "EMP";
 	itemAction = "pick up";
 	itemDescription = "This is an EMP";
+	uses = NULL;
 }
 
 void APickup_EMP::BeginPlay()
@@ -24,4 +25,10 @@ void APickup_EMP::Use_Implementation()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used an EMP: Use_Implementation() IT'S COOL IF YOU'RE SEEING THIS"));
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	MyCharacter->ToggleInventory();
+}
+
+void APickup_EMP::Discard_Implementation()
+{
+	interactableMesh->SetVisibility(true);
+	interactableMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 }
