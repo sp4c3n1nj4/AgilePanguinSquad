@@ -12,7 +12,6 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/GameplayStatics.h"
 #include "EnhancedInputSubsystems.h"
-#include "Pickup_Wrench.h"
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -56,6 +55,12 @@ AExperimentalCharacter::AExperimentalCharacter()
 	bIsGamePaused = false;
 	bEngineOverlap_0 = false;
 	bEngineOverlap_1 = false;
+	bFuelStorageOverlap = false;
+	bO2RefresherOverlap = false;
+	bSteeringOverlap = false;
+	bBridgeOverlap = false;
+	bO2H2OStorageOverlap = false;
+	bDOSSOverlap = false;
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)

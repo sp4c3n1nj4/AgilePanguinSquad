@@ -18,10 +18,18 @@ AExperimentalGameMode::AExperimentalGameMode()
 	/*Sets default HUD state to ingame*/
 	HUDState = EHUDState::HS_Ingame;
 
-	bEngineBroken_0, bEngineBroken_1, bSteeringBroken, bO2RefreshBroken, bO2H2OStorageBroken, bFuelStorageBroken, bBridgeBroken, bStaffMainBroken, 
+	bEngineBroken_0 = false;
+	bEngineBroken_1 = false;
+	bSteeringBroken = false;
+	bO2RefreshBroken = false;
+	bO2H2OStorageBroken = false;
+	bFuelStorageBroken = false;
+	bBridgeBroken = false;
+	bStaffMainBroken = false;
 	bDOSSBroken = false;
-	stableNum, maxStableNum = 100;
-	chanceNum = 20;
+	stableNum = 100;
+	maxStableNum = 100;
+	chanceNum = 1;
 }
 
 void AExperimentalGameMode::BeginPlay()

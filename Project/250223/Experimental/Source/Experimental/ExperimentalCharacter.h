@@ -89,6 +89,24 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
 	bool bSteeringOverlap;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	bool bO2RefresherOverlap;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	bool bFuelStorageOverlap;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	bool bBridgeOverlap;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	bool bO2H2OStorageOverlap;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	bool bStaffMainOverlap;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	bool bDOSSOverlap;
+
 	/*Adds an item to the inventory*/
 	UFUNCTION(BlueprintPure, Category = "Inventory Functions")
 	bool AddItemToInventory(APickup* Item);
