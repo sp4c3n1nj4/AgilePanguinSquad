@@ -279,7 +279,7 @@ void AExperimentalGameMode::DOSSTimer()
 void AExperimentalGameMode::EngineChance_0()
 {
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
-	stateEngine_0 = FMath::RandRange(0, 9);
+	stateEngine_0 = FMath::RandRange(0, 20);
 	FTimerHandle TimerHandle;
 
 	if (stateEngine_0 < chanceNum)
@@ -300,7 +300,7 @@ void AExperimentalGameMode::EngineChance_0()
 void AExperimentalGameMode::EngineChance_1()
 {
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
-	stateEngine_1 = FMath::RandRange(0, 9);
+	stateEngine_1 = FMath::RandRange(0, 20);
 	FTimerHandle TimerHandle;
 
 	if (stateEngine_1 < chanceNum)
@@ -321,7 +321,7 @@ void AExperimentalGameMode::EngineChance_1()
 void AExperimentalGameMode::SteeringChance()
 {
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
-	stateSteering = FMath::RandRange(0, 9);
+	stateSteering = FMath::RandRange(0, 20);
 	FTimerHandle TimerHandle;
 
 	if (stateSteering < chanceNum)
@@ -342,7 +342,7 @@ void AExperimentalGameMode::SteeringChance()
 void AExperimentalGameMode::O2RefreshChance()
 {
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
-	stateO2Refresh = FMath::RandRange(0, 9);
+	stateO2Refresh = FMath::RandRange(0, 20);
 	FTimerHandle TimerHandle;
 
 	if (stateO2Refresh < chanceNum)
@@ -363,7 +363,7 @@ void AExperimentalGameMode::O2RefreshChance()
 void AExperimentalGameMode::O2H2OStorageChance()
 {
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
-	stateO2H2OStorage = FMath::RandRange(0, 9);
+	stateO2H2OStorage = FMath::RandRange(0, 20);
 	FTimerHandle TimerHandle;
 
 	if (stateO2H2OStorage < chanceNum)
@@ -384,7 +384,7 @@ void AExperimentalGameMode::O2H2OStorageChance()
 void AExperimentalGameMode::FuelStorageChance()
 {
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
-	stateFuelStorage = FMath::RandRange(0, 9);
+	stateFuelStorage = FMath::RandRange(0, 20);
 	FTimerHandle TimerHandle;
 
 	if (stateFuelStorage < chanceNum)
@@ -405,7 +405,7 @@ void AExperimentalGameMode::FuelStorageChance()
 void AExperimentalGameMode::BridgeChance()
 {
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
-	stateBridge = FMath::RandRange(0, 9);
+	stateBridge = FMath::RandRange(0, 20);
 	FTimerHandle TimerHandle;
 
 	if (stateBridge < chanceNum)
@@ -426,7 +426,7 @@ void AExperimentalGameMode::BridgeChance()
 void AExperimentalGameMode::StaffMainChance()
 {
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
-	stateStaffMain = FMath::RandRange(0, 9);
+	stateStaffMain = FMath::RandRange(0, 20);
 	FTimerHandle TimerHandle;
 
 	if (stateStaffMain < chanceNum)
@@ -447,7 +447,7 @@ void AExperimentalGameMode::StaffMainChance()
 void AExperimentalGameMode::DOSSChance()
 {
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
-	stateDOSS = FMath::RandRange(0, 9);
+	stateDOSS = FMath::RandRange(0, 20);
 	FTimerHandle TimerHandle;
 
 	if (stateDOSS < chanceNum)
