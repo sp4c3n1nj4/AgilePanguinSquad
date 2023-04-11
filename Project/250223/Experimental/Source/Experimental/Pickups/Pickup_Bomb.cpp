@@ -23,9 +23,20 @@ void APickup_Bomb::BeginPlay()
 /*When item is used*/
 void APickup_Bomb::Use_Implementation()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a bomb: Use_Implementation() IT'S COOL IF YOU'RE SEEING THIS"));
+	AExperimentalGameMode* GM = Cast<AExperimentalGameMode>(GetWorld()->GetAuthGameMode());
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
-	MyCharacter->ToggleInventory();
+
+	if (MyCharacter->bTutorial3Overlap == true)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a bomb for tutorial door 3"));
+		MyCharacter->ToggleInventory();
+		GM->bOpenTutorialDoor2 = true;
+		return;
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("You can't use the bomb here"));
+	}
 }
 
 void APickup_Bomb::Discard_Implementation()

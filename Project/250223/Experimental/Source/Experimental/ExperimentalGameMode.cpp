@@ -30,6 +30,9 @@ AExperimentalGameMode::AExperimentalGameMode()
 	stableNum = 100;
 	maxStableNum = 100;
 	chanceNum = 1;
+
+	bOpenTutorialDoor2 = false;
+	bOpenTutorialDoor3 = false;
 }
 
 void AExperimentalGameMode::BeginPlay()

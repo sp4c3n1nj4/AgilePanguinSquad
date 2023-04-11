@@ -82,6 +82,14 @@ void APickup_Wrench::Use_Implementation()
 		}
 	}
 
+	if (MyCharacter->bTutorial2Overlap == true)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a wrench for Tutorial Door 2"));
+		MyCharacter->ToggleInventory();
+		GM->bOpenTutorialDoor2 = true;
+		return;
+	}
+
 	else
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("You can't use the wrench here"));

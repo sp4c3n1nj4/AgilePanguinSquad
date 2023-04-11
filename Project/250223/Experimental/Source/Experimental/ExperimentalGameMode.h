@@ -94,6 +94,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
 	int maxStableNum;
 
+	//TUTORIALS
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorial")
+	bool bOpenTutorialDoor2;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorial")
+	bool bOpenTutorialDoor3;
+
 protected:
 	/*Actual HUD State, can only be used within this class, and not outside*/
 	uint8 HUDState;

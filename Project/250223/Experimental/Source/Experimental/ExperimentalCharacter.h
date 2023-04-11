@@ -107,6 +107,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
 	bool bDOSSOverlap;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorial")
+	bool bTutorial2Overlap;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorial")
+	bool bTutorial3Overlap;
+
 	/*Adds an item to the inventory*/
 	UFUNCTION(BlueprintPure, Category = "Inventory Functions")
 	bool AddItemToInventory(APickup* Item);

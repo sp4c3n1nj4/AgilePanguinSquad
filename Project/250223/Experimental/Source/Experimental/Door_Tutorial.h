@@ -18,8 +18,5 @@ public:
 protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
-	bool bDoorOpen;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
 	int doorInt;
 };
