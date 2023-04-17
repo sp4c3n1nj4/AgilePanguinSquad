@@ -35,6 +35,15 @@ void APickup_FireExtinguisher::Use_Implementation()
 			GM->AddStable();
 			GM->bO2RefreshBroken = false;
 			uses--;
+			if (uses == 0)
+			{
+				Discard_Implementation();
+				uses = 3;
+			}
+			else
+			{
+				itemName = FString::Printf(TEXT("Fire Extinguisher (x%d)"), uses);
+			}
 			return;
 		}
 

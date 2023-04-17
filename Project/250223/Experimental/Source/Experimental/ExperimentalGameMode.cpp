@@ -31,6 +31,7 @@ AExperimentalGameMode::AExperimentalGameMode()
 	maxStableNum = 100;
 	chanceNum = 1;
 
+	bTutorial = false;
 	bOpenTutorialDoor2 = false;
 	bOpenTutorialDoor3 = false;
 }
@@ -43,106 +44,109 @@ void AExperimentalGameMode::BeginPlay()
 	{
 		ApplyHUDChanges();
 		
-		if (bEngineBroken_0 == false)
+		if (bTutorial == false)
 		{
-			EngineTimer_0();
+			if (bEngineBroken_0 == false)
+			{
+				EngineTimer_0();
 
-		}
+			}
 
-		else
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 1 is broken"));
-			DecreaseStable();
-		}
+			else
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 1 is broken"));
+				DecreaseStable();
+			}
 
-		if (bEngineBroken_1 == false)
-		{
-			EngineTimer_1();
-		}
+			if (bEngineBroken_1 == false)
+			{
+				EngineTimer_1();
+			}
 
-		else
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 2 is broken"));
-			DecreaseStable();
-		}
+			else
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 2 is broken"));
+				DecreaseStable();
+			}
 
-		if (bSteeringBroken == false)
-		{
-			SteeringTimer();
-		}
+			if (bSteeringBroken == false)
+			{
+				SteeringTimer();
+			}
 
-		else
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Steering is broken"));
-			DecreaseStable();
-		}
+			else
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Steering is broken"));
+				DecreaseStable();
+			}
 
-		if (bO2RefreshBroken == false)
-		{
-			O2RefreshTimer();
-		}
+			if (bO2RefreshBroken == false)
+			{
+				O2RefreshTimer();
+			}
 
-		else
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Oxygen refresher is broken"));
-			DecreaseStable();
-		}
+			else
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Oxygen refresher is broken"));
+				DecreaseStable();
+			}
 
-		if (bO2H2OStorageBroken == false)
-		{
-			O2H2OStorageTimer();
-		}
+			if (bO2H2OStorageBroken == false)
+			{
+				O2H2OStorageTimer();
+			}
 
-		else
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Oxygen/Water storage is broken"));
-			DecreaseStable();
-		}
+			else
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Oxygen/Water storage is broken"));
+				DecreaseStable();
+			}
 
-		if (bFuelStorageBroken == false)
-		{
-			FuelStorageTimer();
-		}
+			if (bFuelStorageBroken == false)
+			{
+				FuelStorageTimer();
+			}
 
-		else
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Fuel storage is broken"));
-			DecreaseStable();
-		}
+			else
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Fuel storage is broken"));
+				DecreaseStable();
+			}
 
-		if (bBridgeBroken == false)
-		{
-			BridgeTimer();
-		}
+			if (bBridgeBroken == false)
+			{
+				BridgeTimer();
+			}
 
-		else
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Bridge is broken"));
-			DecreaseStable();
-		}
+			else
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Bridge is broken"));
+				DecreaseStable();
+			}
 
-		if (bStaffMainBroken == false)
-		{
-			StaffMainTimer();
-		}
+			if (bStaffMainBroken == false)
+			{
+				StaffMainTimer();
+			}
 
-		else
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Staff maintenance is broken"));
-			DecreaseStable();
-		}
+			else
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Staff maintenance is broken"));
+				DecreaseStable();
+			}
 
-		if (bDOSSBroken == false)
-		{
-			DOSSTimer();
-		}
+			if (bDOSSBroken == false)
+			{
+				DOSSTimer();
+			}
 
-		else
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("DOSS is broken"));
-			DecreaseStable();
+			else
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("DOSS is broken"));
+				DecreaseStable();
+			}
 		}
-	}
+	}		
 }
 
 void AExperimentalGameMode::ApplyHUDChanges()

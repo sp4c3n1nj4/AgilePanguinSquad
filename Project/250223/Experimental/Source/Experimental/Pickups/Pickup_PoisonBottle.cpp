@@ -35,6 +35,16 @@ void APickup_PoisonBottle::Use_Implementation()
 			MyCharacter->ToggleInventory();
 			GM->DecreaseStable();
 			GM->bO2H2OStorageBroken = true;
+			uses--;
+			if (uses == 0)
+			{
+				Discard_Implementation();
+				uses = 3;
+			}
+			else
+			{
+				itemName = FString::Printf(TEXT("Poison Bottle (x%d)"), uses);
+			}
 			return;
 		}
 		else

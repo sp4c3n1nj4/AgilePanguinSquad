@@ -25,6 +25,12 @@ void APickup_Suitcase::Use_Implementation()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a suitcase: Use_Implementation() IT'S COOL IF YOU'RE SEEING THIS"));
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	MyCharacter->ToggleInventory();
+	uses--;
+	if (uses == 0)
+	{
+		Discard_Implementation();
+		uses = 1;
+	}
 }
 
 void APickup_Suitcase::Discard_Implementation()

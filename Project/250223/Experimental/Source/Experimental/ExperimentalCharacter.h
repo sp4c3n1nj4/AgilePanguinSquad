@@ -107,11 +107,34 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
 	bool bDOSSOverlap;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	bool bAPSRDChargeOverlap;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	bool bC2M2ChargeOverlap;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	bool bCaptainChargeOverlap;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	bool bCarGOChargeOverlap;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	bool bMIMAChargeOverlap;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	bool bSOSChargeOverlap;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	bool bSSRChargeOverlap;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorial")
 	bool bTutorial2Overlap;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorial")
 	bool bTutorial3Overlap;
+
+	
 
 	/*Adds an item to the inventory*/
 	UFUNCTION(BlueprintPure, Category = "Inventory Functions")

@@ -36,6 +36,15 @@ void APickup_FuelTank::Use_Implementation()
 			GM->AddStable();
 			GM->bFuelStorageBroken = false;
 			uses--;
+			if (uses == 0)
+			{
+				Discard_Implementation();
+				uses = 3;
+			}
+			else
+			{
+				itemName = FString::Printf(TEXT("Fuel Tank (x%d)"), uses);
+			}
 			return;
 		}
 		else

@@ -35,6 +35,15 @@ void APickup_MedicalBottle::Use_Implementation()
 			GM->DecreaseStable();
 			GM->bO2H2OStorageBroken = false;
 			uses--;
+			if (uses == 0)
+			{
+				Discard_Implementation();
+				uses = 3;
+			}
+			else
+			{
+				itemName = FString::Printf(TEXT("Medicial Bottle (x%d)"), uses);
+			}
 			return;
 		}
 		else

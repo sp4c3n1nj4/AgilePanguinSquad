@@ -30,12 +30,17 @@ void APickup_Screwdriver::Use_Implementation()
 	{
 		if (GM->bStaffMainBroken == false)
 		{
-
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You damaged the staff maintenance room"));
+			MyCharacter->ToggleInventory();
+			GM->DecreaseStable();
+			GM->bStaffMainBroken = true;
+		}
+		else
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Staff maintenance is already damaged"));
+			return;
 		}
 	}
-	
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You broke the staff maintenance room"));
-	MyCharacter->ToggleInventory();
 }
 
 void APickup_Screwdriver::Discard_Implementation()

@@ -53,6 +53,8 @@ AExperimentalCharacter::AExperimentalCharacter()
 	reach = 500.f;
 	suspicionPercentage = 0.f;
 	bIsGamePaused = false;
+	
+	// general overlaps
 	bEngineOverlap_0 = false;
 	bEngineOverlap_1 = false;
 	bFuelStorageOverlap = false;
@@ -61,6 +63,19 @@ AExperimentalCharacter::AExperimentalCharacter()
 	bBridgeOverlap = false;
 	bO2H2OStorageOverlap = false;
 	bDOSSOverlap = false;
+
+	// charging overlaps
+	bAPSRDChargeOverlap = false;
+	bC2M2ChargeOverlap = false;
+	bCaptainChargeOverlap = false;
+	bCarGOChargeOverlap = false;
+	bMIMAChargeOverlap = false;
+	bSOSChargeOverlap = false;
+	bSSRChargeOverlap = false;
+	
+	// tutorial overlaps
+	bTutorial2Overlap = false;
+	bTutorial3Overlap = false;
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)

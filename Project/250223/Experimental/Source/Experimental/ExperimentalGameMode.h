@@ -96,6 +96,9 @@ public:
 
 	//TUTORIALS
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorial")
+	bool bTutorial;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorial")
 	bool bOpenTutorialDoor2;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorial")

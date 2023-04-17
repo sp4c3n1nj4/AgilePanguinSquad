@@ -25,6 +25,16 @@ void APickup_DuctTape::Use_Implementation()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used duct tape: Use_Implementation() IT'S COOL IF YOU'RE SEEING THIS"));
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	MyCharacter->ToggleInventory();
+	uses--;
+	if (uses == 0)
+	{
+		Discard_Implementation();
+		uses = 3;
+	}
+	else
+	{
+		itemName = FString::Printf(TEXT("Duct Tape (x%d)"), uses);
+	}
 }
 
 void APickup_DuctTape::Discard_Implementation()

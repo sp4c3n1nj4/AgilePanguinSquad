@@ -35,6 +35,15 @@ void APickup_Oil::Use_Implementation()
 			GM->DecreaseStable();
 			GM->bEngineBroken_0 = true;
 			uses--;
+			if (uses == 0)
+			{
+				Discard_Implementation();
+				uses = 3;
+			}
+			else
+			{
+				itemName = FString::Printf(TEXT("Oil (x%d)"), uses);
+			}
 			return;
 		}
 		else

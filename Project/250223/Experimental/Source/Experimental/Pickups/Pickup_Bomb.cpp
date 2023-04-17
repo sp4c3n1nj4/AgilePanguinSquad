@@ -1,9 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Pickup_Bomb.h"
 #include "Kismet/GameplayStatics.h"
 #include "../ExperimentalCharacter.h"
+#include "../ExperimentalGameMode.h"
 
 APickup_Bomb::APickup_Bomb()
 {
@@ -26,11 +26,19 @@ void APickup_Bomb::Use_Implementation()
 	AExperimentalGameMode* GM = Cast<AExperimentalGameMode>(GetWorld()->GetAuthGameMode());
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 
+	if (MyCharacter)
+	
 	if (MyCharacter->bTutorial3Overlap == true)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a bomb for tutorial door 3"));
 		MyCharacter->ToggleInventory();
-		GM->bOpenTutorialDoor2 = true;
+		GM->bOpenTutorialDoor3 = true;
+		uses--;
+		if (uses == 0)
+		{
+			Discard_Implementation();
+			uses = 1;
+		}
 		return;
 	}
 	else
