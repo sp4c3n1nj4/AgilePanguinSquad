@@ -9,7 +9,9 @@ AChargingPort::AChargingPort()
 	PrimaryActorTick.bCanEverTick = true;
 
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
+	
 	BoxCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("Box Collision"));
+	BoxCollision->SetupAttachment(Mesh);
 
 }
 

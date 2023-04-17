@@ -27,6 +27,15 @@ AExperimentalGameMode::AExperimentalGameMode()
 	bBridgeBroken = false;
 	bStaffMainBroken = false;
 	bDOSSBroken = false;
+
+	bAPSRDChargeBroken = false;
+	bC2M2ChargeBroken = false;
+	bCarGOChargeBroken = false;
+	bCaptainChargeBroken = false;
+	bMIMAChargeBroken = false;
+	bSOSChargeBroken = false;
+	bSSRChargeBroken = false;
+
 	stableNum = 100;
 	maxStableNum = 100;
 	chanceNum = 1;

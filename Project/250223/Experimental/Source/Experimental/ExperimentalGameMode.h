@@ -87,6 +87,16 @@ public:
 	bool bDOSSBroken; //Room 1
 	/*bool bChargingBroken; //Room 7*/
 	/*----------------------------------------------------*/
+
+	/*Broken charging ports*/
+	bool bAPSRDChargeBroken;
+	bool bC2M2ChargeBroken;
+	bool bCarGOChargeBroken;
+	bool bCaptainChargeBroken;
+	bool bMIMAChargeBroken;
+	bool bSOSChargeBroken;
+	bool bSSRChargeBroken;
+	/*----------------------------------------------------*/
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
 	int stableNum;
