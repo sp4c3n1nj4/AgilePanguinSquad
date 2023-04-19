@@ -11,9 +11,10 @@ APickup_FuelTank::APickup_FuelTank()
 	/*Default values,
 	best to set the thumbnail, & mesh in the editor*/
 	uses = 3;
-	itemName = FString::Printf(TEXT("Fuel Tank (x%d)"), uses);
+	itemName = "Fuel Tank";
 	itemAction = "pick up";
 	itemDescription = "Refuels fuel storage. 3x use.";
+	bUsable = false;
 }
 
 void APickup_FuelTank::BeginPlay()
@@ -34,27 +35,21 @@ void APickup_FuelTank::Use_Implementation()
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You added fuel to the pipes"));
 			MyCharacter->ToggleInventory();
 			GM->AddStable();
+			bUsable = true;
 			GM->bFuelStorageBroken = false;
-			uses--;
-			if (uses == 0)
-			{
-				Discard_Implementation();
-				uses = 3;
-			}
-			else
-			{
-				itemName = FString::Printf(TEXT("Fuel Tank (x%d)"), uses);
-			}
 			return;
 		}
 		else
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("The pipes don't need fuel yet"));
+			bUsable = false;
+			return;
 		}
 	}
 	else
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("You can't use the fuel tank here"));
+		bUsable = false;
 	}
 }
 
@@ -62,4 +57,9 @@ void APickup_FuelTank::Discard_Implementation()
 {
 	interactableMesh->SetVisibility(true);
 	interactableMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+}
+
+void APickup_FuelTank::Reset_Uses()
+{
+	uses = 3;
 }

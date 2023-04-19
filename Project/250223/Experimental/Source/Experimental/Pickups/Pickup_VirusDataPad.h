@@ -14,9 +14,12 @@ class EXPERIMENTAL_API APickup_VirusDataPad : public APickup
 
 public:
 	APickup_VirusDataPad();
+	
+	void UseAccepted();
+	void DOSSReboot();
+	
 	virtual void Use_Implementation() override;
 	virtual void Discard_Implementation() override;
-	void DOSSReboot();
 
 protected:
 	virtual void BeginPlay();

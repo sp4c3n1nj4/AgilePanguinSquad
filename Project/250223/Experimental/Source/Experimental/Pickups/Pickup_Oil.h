@@ -14,8 +14,12 @@ class EXPERIMENTAL_API APickup_Oil : public APickup
 
 public:
 	APickup_Oil();
+
+	void UseAccepted();
+
 	virtual void Use_Implementation() override;
 	virtual void Discard_Implementation() override;
+	virtual void Reset_Uses() override;
 
 protected:
 	virtual void BeginPlay();

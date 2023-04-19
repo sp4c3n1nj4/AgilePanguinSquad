@@ -13,6 +13,7 @@ APickup_Wrench::APickup_Wrench()
 	itemAction = "pick up";
 	itemDescription = "Used to fix either engine, and the steering room. Infinite use.";
 	uses = NULL;
+	bUsable = false;
 }
 
 void APickup_Wrench::BeginPlay()
@@ -31,8 +32,7 @@ void APickup_Wrench::Use_Implementation()
 		if (GM->bEngineBroken_0 == true)
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a wrench to fix engine 1"));
-			MyCharacter->ToggleInventory();
-			GM->AddStable();
+			UseAccepted();
 			GM->bEngineBroken_0 = false;
 			GM->EngineTimer_0();
 			return;
@@ -40,6 +40,7 @@ void APickup_Wrench::Use_Implementation()
 		else
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("£ngine 1 doesn't need fixing yet"));
+			bUsable = false;
 			return;
 		}
 	}
@@ -49,8 +50,7 @@ void APickup_Wrench::Use_Implementation()
 		if (GM->bEngineBroken_1 == true)
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a wrench to fix engine 2"));
-			MyCharacter->ToggleInventory();
-			GM->AddStable();
+			UseAccepted();
 			GM->bEngineBroken_1 = false;
 			GM->EngineTimer_1();
 			return;
@@ -59,6 +59,7 @@ void APickup_Wrench::Use_Implementation()
 		else
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 2 doesn't need fixing yet"));
+			bUsable = false;
 			return;
 		}
 	}
@@ -68,8 +69,7 @@ void APickup_Wrench::Use_Implementation()
 		if (GM->bSteeringBroken == true)
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a wrench to fix steering"));
-			MyCharacter->ToggleInventory();
-			GM->AddStable();
+			UseAccepted();
 			GM->bSteeringBroken = false;
 			GM->SteeringTimer();
 			return;
@@ -78,6 +78,7 @@ void APickup_Wrench::Use_Implementation()
 		else
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Steering doesn't need fixing yet"));
+			bUsable = false;
 			return;
 		}
 	}
@@ -86,6 +87,7 @@ void APickup_Wrench::Use_Implementation()
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a wrench for Tutorial Door 2"));
 		MyCharacter->ToggleInventory();
+		bUsable = true;
 		GM->bOpenTutorialDoor2 = true;
 		return;
 	}
@@ -93,7 +95,18 @@ void APickup_Wrench::Use_Implementation()
 	else
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("You can't use the wrench here"));
+		bUsable = false;
 	}
+}
+
+void APickup_Wrench::UseAccepted()
+{
+	AExperimentalGameMode* GM = Cast<AExperimentalGameMode>(GetWorld()->GetAuthGameMode());
+	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
+	
+	MyCharacter->ToggleInventory();
+	GM->AddStable();
+	bUsable = true;
 }
 
 void APickup_Wrench::Discard_Implementation()

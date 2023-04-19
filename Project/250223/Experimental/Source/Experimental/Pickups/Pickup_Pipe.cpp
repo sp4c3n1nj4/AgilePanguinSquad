@@ -13,6 +13,7 @@ APickup_Pipe::APickup_Pipe()
 	itemAction = "pick up";
 	itemDescription = "Damages steering room. Infinite use.";
 	uses = NULL;
+	bUsable = false;
 }
 
 void APickup_Pipe::BeginPlay()
@@ -33,18 +34,21 @@ void APickup_Pipe::Use_Implementation()
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You damaged the steering room"));
 			MyCharacter->ToggleInventory();
 			GM->DecreaseStable();
+			bUsable = true;
 			GM->bSteeringBroken = true;
 			return;
 		}
 		else
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("The steering room isn't damaged"));
+			bUsable = false;
 			return;
 		}
 	}
 	else
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("You can't use the pipe here"));
+		bUsable = false;
 	}
 }
 

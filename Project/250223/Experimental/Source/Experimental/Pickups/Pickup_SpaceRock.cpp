@@ -12,6 +12,7 @@ APickup_SpaceRock::APickup_SpaceRock()
 	itemAction = "pick up";
 	itemDescription = "This is a space rock";
 	uses = NULL;
+	bUsable = false;
 }
 
 void APickup_SpaceRock::BeginPlay()
@@ -25,6 +26,7 @@ void APickup_SpaceRock::Use_Implementation()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a space rock: Use_Implementation() IT'S COOL IF YOU'RE SEEING THIS"));
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	MyCharacter->ToggleInventory();
+	bUsable = true;
 }
 
 void APickup_SpaceRock::Discard_Implementation()

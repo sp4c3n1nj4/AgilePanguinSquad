@@ -14,6 +14,9 @@ class EXPERIMENTAL_API APickup_Wrench : public APickup
 
 public:
 	APickup_Wrench();
+
+	void UseAccepted();
+
 	virtual void Use_Implementation() override;
 	virtual void Discard_Implementation() override;
 

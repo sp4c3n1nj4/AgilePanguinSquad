@@ -13,6 +13,7 @@ APickup_Lighter::APickup_Lighter()
 	itemAction = "pick up";
 	itemDescription = "Damages oxygen refreshers. Infinite use.";
 	uses = NULL;
+	bUsable = false;
 }
 
 void APickup_Lighter::BeginPlay()
@@ -33,14 +34,21 @@ void APickup_Lighter::Use_Implementation()
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You broke the oxygen refresher"));
 			MyCharacter->ToggleInventory();
 			GM->DecreaseStable();
+			bUsable = true;
 			GM->bO2RefreshBroken = true;
 			return;
 		}
 		else
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("The oxygen refresher is already broken"));
+			bUsable = false;
 			return;
 		}
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("You can't use the lighter here"));
+		bUsable = false;
 	}
 }
 

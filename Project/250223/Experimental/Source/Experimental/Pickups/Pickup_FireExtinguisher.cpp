@@ -10,9 +10,10 @@ APickup_FireExtinguisher::APickup_FireExtinguisher()
 	/*Default values,
 	best to set the thumbnail, & mesh in the editor*/
 	uses = 3;
-	itemName = FString::Printf(TEXT("Fire Extinguisher (x%d)"), uses);
+	itemName = "Fire Extinguisher";
 	itemAction = "pick up";
 	itemDescription = "Used to repair oxygen refreshers. 3x use.";
+	bUsable = false;
 }
 
 void APickup_FireExtinguisher::BeginPlay()
@@ -33,23 +34,15 @@ void APickup_FireExtinguisher::Use_Implementation()
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You fixed the oxygen refresher"));
 			MyCharacter->ToggleInventory();
 			GM->AddStable();
+			bUsable = true;
 			GM->bO2RefreshBroken = false;
-			uses--;
-			if (uses == 0)
-			{
-				Discard_Implementation();
-				uses = 3;
-			}
-			else
-			{
-				itemName = FString::Printf(TEXT("Fire Extinguisher (x%d)"), uses);
-			}
 			return;
 		}
 
 		else
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("The oxygen refresher doesn't need fixing yet"));
+			bUsable = false;
 			return;
 		}
 	}
@@ -57,6 +50,7 @@ void APickup_FireExtinguisher::Use_Implementation()
 	else
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("You can't use the fire extinguisher here"));
+		bUsable = false;
 	}
 	
 
@@ -66,4 +60,9 @@ void APickup_FireExtinguisher::Discard_Implementation()
 {
 	interactableMesh->SetVisibility(true);
 	interactableMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+}
+
+void APickup_FireExtinguisher::Reset_Uses()
+{
+	uses = 3;
 }

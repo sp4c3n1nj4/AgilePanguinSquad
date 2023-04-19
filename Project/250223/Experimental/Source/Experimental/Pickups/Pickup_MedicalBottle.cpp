@@ -10,9 +10,10 @@ APickup_MedicalBottle::APickup_MedicalBottle()
 	/*Default values,
 	best to set the thumbnail, & mesh in the editor*/
 	uses = 3;
-	itemName = FString::Printf(TEXT("Medical Bottle (x%d)"), uses);
+	itemName = "Medical Bottle";
 	itemAction = "pick up";
 	itemDescription = "Unpoisons the oxygen/water storage. 3x use.";
+	bUsable = false;
 }
 
 void APickup_MedicalBottle::BeginPlay()
@@ -33,28 +34,21 @@ void APickup_MedicalBottle::Use_Implementation()
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You unpoisoned the oxygen/water"));
 			MyCharacter->ToggleInventory();
 			GM->DecreaseStable();
+			bUsable = true;
 			GM->bO2H2OStorageBroken = false;
-			uses--;
-			if (uses == 0)
-			{
-				Discard_Implementation();
-				uses = 3;
-			}
-			else
-			{
-				itemName = FString::Printf(TEXT("Medicial Bottle (x%d)"), uses);
-			}
 			return;
 		}
 		else
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("The oxygen/water isn't poisoned"));
+			bUsable = false;
 			return;
 		}
 	}
 	else
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("You can't use the medical bottle here"));
+		bUsable = false;
 	}
 }
 
@@ -62,4 +56,9 @@ void APickup_MedicalBottle::Discard_Implementation()
 {
 	interactableMesh->SetVisibility(true);
 	interactableMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+}
+
+void APickup_MedicalBottle::Reset_Uses()
+{
+	uses = 3;
 }

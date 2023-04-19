@@ -13,6 +13,7 @@ APickup_VirusDataPad::APickup_VirusDataPad()
 	itemAction = "pick up";
 	itemDescription = "Infect viruses on the bridge, or DOSS. Infinite use.";
 	uses = NULL;
+	bUsable = false;
 }
 
 void APickup_VirusDataPad::BeginPlay()
@@ -32,14 +33,15 @@ void APickup_VirusDataPad::Use_Implementation()
 		if (GM->bBridgeBroken == false)
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You have infected the bridge with viruses"));
-			MyCharacter->ToggleInventory();
-			GM->DecreaseStable();
+			UseAccepted();
 			GM->bBridgeBroken = true;
 			return;
 		}
 		else
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("The bridge is already infected with viruses"));
+			bUsable = false;
+			return;
 		}
 	}
 
@@ -48,8 +50,7 @@ void APickup_VirusDataPad::Use_Implementation()
 		if (GM->bDOSSBroken == false)
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You infected DOSS with viruses for 1 minute"));
-			MyCharacter->ToggleInventory();
-			GM->DecreaseStable();
+			UseAccepted();
 			GM->bDOSSBroken = true;
 			GetWorldTimerManager().SetTimer(delayHandle, this, &APickup_VirusDataPad::DOSSReboot, 60.f, false);
 			return;
@@ -57,13 +58,25 @@ void APickup_VirusDataPad::Use_Implementation()
 		else
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("DOSS is already infected with viruses"));
+			bUsable = false;
 			return;
 		}
 	}
 	else
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("You can't use the virus data pad here"));
+		bUsable = false;
 	}
+}
+
+void APickup_VirusDataPad::UseAccepted()
+{
+	AExperimentalGameMode* GM = Cast<AExperimentalGameMode>(GetWorld()->GetAuthGameMode());
+	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
+	
+	MyCharacter->ToggleInventory();
+	GM->DecreaseStable();
+	bUsable = true;
 }
 
 void APickup_VirusDataPad::Discard_Implementation()

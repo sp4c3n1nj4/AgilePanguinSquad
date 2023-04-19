@@ -12,6 +12,7 @@ APickup_Pie::APickup_Pie()
 	itemAction = "pick up";
 	itemDescription = "This is a pie";
 	uses = 1;
+	bUsable = false;
 }
 
 void APickup_Pie::BeginPlay()
@@ -25,16 +26,16 @@ void APickup_Pie::Use_Implementation()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a pie: Use_Implementation() IT'S COOL IF YOU'RE SEEING THIS"));
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	MyCharacter->ToggleInventory();
-	uses--;
-	if (uses == 0)
-	{
-		Discard_Implementation();
-		uses = 1;
-	}
+	bUsable = true;
 }
 
 void APickup_Pie::Discard_Implementation()
 {
 	interactableMesh->SetVisibility(true);
 	interactableMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+}
+
+void APickup_Pie::Reset_Uses()
+{
+	uses = 1;
 }

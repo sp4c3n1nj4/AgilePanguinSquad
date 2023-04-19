@@ -16,6 +16,7 @@ public:
 	APickup_Turnip();
 	virtual void Use_Implementation() override;
 	virtual void Discard_Implementation() override;
+	virtual void Reset_Uses() override;
 
 protected:
 	virtual void BeginPlay();

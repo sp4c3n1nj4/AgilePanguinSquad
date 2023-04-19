@@ -12,6 +12,7 @@ APickup_StunBaton::APickup_StunBaton()
 	itemAction = "pick up";
 	itemDescription = "This is a stun baton";
 	uses = NULL;
+	bUsable = false;
 }
 
 void APickup_StunBaton::BeginPlay()
@@ -25,6 +26,7 @@ void APickup_StunBaton::Use_Implementation()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a stun baton: Use_Implementation() IT'S COOL IF YOU'RE SEEING THIS"));
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	MyCharacter->ToggleInventory();
+	bUsable = true;
 }
 
 void APickup_StunBaton::Discard_Implementation()

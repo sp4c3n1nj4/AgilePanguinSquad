@@ -12,6 +12,7 @@ APickup_Duster::APickup_Duster()
 	itemAction = "pick up";
 	itemDescription = "This is a duster";
 	uses = NULL;
+	bUsable = false;
 }
 
 void APickup_Duster::BeginPlay()
@@ -25,6 +26,7 @@ void APickup_Duster::Use_Implementation()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a duster: Use_Implementation() IT'S COOL IF YOU'RE SEEING THIS"));
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	MyCharacter->ToggleInventory();
+	bUsable = true;
 }
 
 void APickup_Duster::Discard_Implementation()

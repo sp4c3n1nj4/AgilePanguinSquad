@@ -79,62 +79,46 @@ public:
 	bool bAlertText;
 
 	bool bIsGamePaused;
+
+
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	/*Overlap Checks*/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Overlaps")
 	bool bEngineOverlap_0;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Overlaps")
 	bool bEngineOverlap_1;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Overlaps")
 	bool bSteeringOverlap;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Overlaps")
 	bool bO2RefresherOverlap;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Overlaps")
 	bool bFuelStorageOverlap;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Overlaps")
 	bool bBridgeOverlap;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Overlaps")
 	bool bO2H2OStorageOverlap;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Overlaps")
 	bool bStaffMainOverlap;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Overlaps")
 	bool bDOSSOverlap;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Overlaps")
 	bool bAPSRDChargeOverlap;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Overlaps")
 	bool bC2M2ChargeOverlap;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Overlaps")
 	bool bCaptainChargeOverlap;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Overlaps")
 	bool bCarGOChargeOverlap;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Overlaps")
 	bool bMIMAChargeOverlap;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Overlaps")
 	bool bSOSChargeOverlap;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Overlaps")
 	bool bSSRChargeOverlap;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorial")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Overlaps")
 	bool bTutorial2Overlap;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorial")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Overlaps")
 	bool bTutorial3Overlap;
-
-	
 
 	/*Adds an item to the inventory*/
 	UFUNCTION(BlueprintPure, Category = "Inventory Functions")

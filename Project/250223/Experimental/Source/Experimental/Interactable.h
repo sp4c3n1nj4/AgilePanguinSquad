@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Particles/ParticleSystem.h"
 #include "Interactable.generated.h"
 
 UCLASS()
@@ -30,4 +31,8 @@ protected:
 	/*Assuming all interactables have a mesh*/
 	UPROPERTY(EditAnywhere, Category = "Interact Properties")
 	class UStaticMeshComponent* interactableMesh;
+
+	/*Assuming all interactables have a mesh*/
+	UPROPERTY(EditAnywhere, Category = "Interact Properties")
+	class UParticleSystem* interactableVFX;
 };

@@ -11,9 +11,10 @@ APickup_PoisonBottle::APickup_PoisonBottle()
 	/*Default values,
 	best to set the thumbnail, & mesh in the editor*/
 	uses = 3;
-	itemName = FString::Printf(TEXT("Poison Bottle (x%d)"), uses);
+	itemName = "Poison Bottle";
 	itemAction = "pick up";
 	itemDescription = "Poisons oxygen/water storage. 3x use.";
+	bUsable = false;
 }
 
 void APickup_PoisonBottle::BeginPlay()
@@ -34,28 +35,21 @@ void APickup_PoisonBottle::Use_Implementation()
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You poisoned the oxygen/water"));
 			MyCharacter->ToggleInventory();
 			GM->DecreaseStable();
+			bUsable = true;
 			GM->bO2H2OStorageBroken = true;
-			uses--;
-			if (uses == 0)
-			{
-				Discard_Implementation();
-				uses = 3;
-			}
-			else
-			{
-				itemName = FString::Printf(TEXT("Poison Bottle (x%d)"), uses);
-			}
 			return;
 		}
 		else
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("The oxygen/water is already poisoned"));
+			bUsable = false;
 			return;
 		}
 	}
 	else
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("You can't use the poison bottle here"));
+		bUsable = false;
 	}
 }
 
@@ -63,4 +57,9 @@ void APickup_PoisonBottle::Discard_Implementation()
 {
 	interactableMesh->SetVisibility(true);
 	interactableMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+}
+
+void APickup_PoisonBottle::Reset_Uses()
+{
+	uses = 3;
 }

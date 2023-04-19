@@ -133,13 +133,28 @@ void AExperimentalCharacter::UseItemAtInventorySlot(int32 slot)
 {
 	if (inventory[slot] != NULL)
 	{
-		inventory[slot]->Use_Implementation();
 		if (inventory[slot]->uses != NULL)
 		{
-			if (inventory[slot]->uses == 0)
+			inventory[slot]->Use_Implementation();
+			
+			if (inventory[slot]->bUsable == true)
 			{
-				inventory[slot] = NULL;
+				inventory[slot]->uses--;
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("uses = %d"), inventory[slot]->uses));
 			}
+			
+			if (inventory[slot]->uses <= 0)
+			{
+				inventory[slot]->Discard_Implementation();
+				inventory[slot]->Reset_Uses();
+				inventory[slot] = NULL;
+				return;
+			}
+		}
+		else
+		{
+			inventory[slot]->Use_Implementation();
+			return;
 		}
 	}
 	else

@@ -89,12 +89,19 @@ public:
 	/*----------------------------------------------------*/
 
 	/*Broken charging ports*/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Charge")
 	bool bAPSRDChargeBroken;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Charge")
 	bool bC2M2ChargeBroken;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Charge")
 	bool bCarGOChargeBroken;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Charge")
 	bool bCaptainChargeBroken;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Charge")
 	bool bMIMAChargeBroken;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Charge")
 	bool bSOSChargeBroken;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Charge")
 	bool bSSRChargeBroken;
 	/*----------------------------------------------------*/
 	

@@ -12,6 +12,7 @@ APickup_Shovel::APickup_Shovel()
 	itemAction = "pick up";
 	itemDescription = "This is a shovel";
 	uses = NULL;
+	bUsable = false;
 }
 
 void APickup_Shovel::BeginPlay()
@@ -25,6 +26,7 @@ void APickup_Shovel::Use_Implementation()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a shovel: Use_Implementation() IT'S COOL IF YOU'RE SEEING THIS"));
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	MyCharacter->ToggleInventory();
+	bUsable = true;
 }
 
 void APickup_Shovel::Discard_Implementation()

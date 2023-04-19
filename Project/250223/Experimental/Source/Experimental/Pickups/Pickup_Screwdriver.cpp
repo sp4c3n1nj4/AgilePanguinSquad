@@ -13,6 +13,7 @@ APickup_Screwdriver::APickup_Screwdriver()
 	itemAction = "pick up";
 	itemDescription = "Permanently damages staff maintenance. Infinite use.";
 	uses = NULL;
+	bUsable = false;
 }
 
 void APickup_Screwdriver::BeginPlay()
@@ -33,13 +34,20 @@ void APickup_Screwdriver::Use_Implementation()
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You damaged the staff maintenance room"));
 			MyCharacter->ToggleInventory();
 			GM->DecreaseStable();
+			bUsable = true;
 			GM->bStaffMainBroken = true;
 		}
 		else
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Staff maintenance is already damaged"));
+			bUsable = false;
 			return;
 		}
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Screwdriver can't be used here"));
+		bUsable = false;
 	}
 }
 

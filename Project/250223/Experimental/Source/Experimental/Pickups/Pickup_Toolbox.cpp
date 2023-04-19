@@ -14,6 +14,7 @@ APickup_Toolbox::APickup_Toolbox()
 	itemAction = "pick up";
 	itemDescription = "Holding the toolbox will double the chances of malfunctions.";
 	uses = NULL;
+	bUsable = false;
 }
 
 void APickup_Toolbox::BeginPlay()
@@ -25,6 +26,7 @@ void APickup_Toolbox::BeginPlay()
 void APickup_Toolbox::Use_Implementation()
 {
 	GEngine->AddOnScreenDebugMessage(1, 5.f, FColor::Red, TEXT("Just hold it!"));
+	bUsable = false;
 }
 
 void APickup_Toolbox::Discard_Implementation()

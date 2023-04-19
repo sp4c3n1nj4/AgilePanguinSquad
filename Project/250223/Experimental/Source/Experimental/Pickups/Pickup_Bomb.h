@@ -17,8 +17,10 @@ class EXPERIMENTAL_API APickup_Bomb : public APickup
 public:
 	APickup_Bomb();
 	virtual void Use_Implementation() override;
-	void UseAccepted();
 	virtual void Discard_Implementation() override;
+	virtual void Reset_Uses() override;
+
+	void UseAccepted();
 
 protected:
 	virtual void BeginPlay();

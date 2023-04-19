@@ -10,9 +10,10 @@ APickup_Oil::APickup_Oil()
 	/*Default values,
 	best to set the thumbnail, & mesh in the editor*/
 	uses = 3;
-	itemName = FString::Printf(TEXT("Oil (x%d)"), uses);
+	itemName = "Oil";
 	itemAction = "pick up";
 	itemDescription = "Oil can be used to damage either engine. 3x use.";
+	bUsable = false;
 }
 
 void APickup_Oil::BeginPlay()
@@ -31,24 +32,15 @@ void APickup_Oil::Use_Implementation()
 		if (GM->bEngineBroken_0 == false)
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You broke Engine 1"));
-			MyCharacter->ToggleInventory();
-			GM->DecreaseStable();
+			UseAccepted();
 			GM->bEngineBroken_0 = true;
-			uses--;
-			if (uses == 0)
-			{
-				Discard_Implementation();
-				uses = 3;
-			}
-			else
-			{
-				itemName = FString::Printf(TEXT("Oil (x%d)"), uses);
-			}
 			return;
 		}
 		else
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 1 is already broken"));
+			bUsable = false;
+			return;
 		}
 	}
 
@@ -57,26 +49,42 @@ void APickup_Oil::Use_Implementation()
 		if (GM->bEngineBroken_1 == false)
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You Broke Engine 2"));
-			MyCharacter->ToggleInventory();
-			GM->DecreaseStable();
+			UseAccepted();
 			GM->bEngineBroken_1 = true;
-			uses--;
 			return;
 		}
 		else
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Engine 2 is already broken"));
+			bUsable = false;
+			return;
 		}
 	}
 
 	else
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("You can't use oil here"));
+		bUsable = false;
 	}
+}
+
+void APickup_Oil::UseAccepted()
+{
+	AExperimentalGameMode* GM = Cast<AExperimentalGameMode>(GetWorld()->GetAuthGameMode());
+	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
+
+	MyCharacter->ToggleInventory();
+	GM->DecreaseStable();
+	bUsable = true;
 }
 
 void APickup_Oil::Discard_Implementation()
 {
 	interactableMesh->SetVisibility(true);
 	interactableMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+}
+
+void APickup_Oil::Reset_Uses()
+{
+	uses = 3;
 }
