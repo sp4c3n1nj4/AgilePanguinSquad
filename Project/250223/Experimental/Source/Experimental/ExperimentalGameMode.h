@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+#include "Sound/SoundCue.h"
+#include "Kismet/GameplayStatics.h"
 #include "ExperimentalGameMode.generated.h"
 
 UCLASS(minimalapi)
@@ -110,6 +112,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
 	int maxStableNum;
+
+	UPROPERTY(EditAnywhere, Category = "SFX")
+	USoundCue* WarningSFX;
 
 	//TUTORIALS
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorial")

@@ -236,6 +236,7 @@ void AExperimentalGameMode::AddStable()
 void AExperimentalGameMode::DecreaseStable()
 {
 	stableNum = stableNum - 10;
+	UGameplayStatics::PlaySound2D(this, WarningSFX);
 }
 
 void AExperimentalGameMode::EngineTimer_0()

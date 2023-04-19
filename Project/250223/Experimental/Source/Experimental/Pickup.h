@@ -4,7 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Interactable.h"
-#include "Components/AudioComponent.h"
+#include "Sound/SoundCue.h"
+#include "Kismet/GameplayStatics.h"
 #include "Pickup.generated.h"
 
 /**
@@ -45,13 +46,13 @@ public:
 	FString itemDescription;
 
 	UPROPERTY(EditAnywhere, Category = "Pickup SFX")
-	UAudioComponent* pickupSFX;
+	USoundCue* pickupSFX;
 
 	UPROPERTY(EditAnywhere, Category = "Pickup SFX")
-	UAudioComponent* useSFX;
+	USoundCue* useSFX;
 
 	UPROPERTY(EditAnywhere, Category = "Pickup SFX")
-	UAudioComponent* discardSFX;
+	USoundCue* discardSFX;
 
 	int uses;
 	bool bUsable;

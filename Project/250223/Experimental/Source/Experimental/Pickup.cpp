@@ -45,13 +45,13 @@ void APickup::Interact_Implementation()
 void APickup::Use_Implementation()
 {
 	GLog->Log("Use() from based pickup class : YOU SHOULD NOT BE SEEING THIS");
-	useSFX->Play();
+	UGameplayStatics::PlaySound2D(this, useSFX);
 }
 
 void APickup::Discard_Implementation()
 {
 	GLog->Log("Discard() from based pickup class : YOU SHOULD NOT BE SEEING THIS");
-	discardSFX->Play();
+	UGameplayStatics::PlaySound2D(this, discardSFX);
 }
 
 void APickup::Reset_Uses()
@@ -65,5 +65,5 @@ void APickup::OnPickedUp()
 {
 	interactableMesh->SetVisibility(false);
 	interactableMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	pickupSFX->Play();
+	UGameplayStatics::PlaySound2D(this, pickupSFX);
 }
