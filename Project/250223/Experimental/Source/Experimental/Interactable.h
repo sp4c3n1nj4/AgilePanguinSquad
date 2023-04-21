@@ -31,8 +31,4 @@ protected:
 	/*Assuming all interactables have a mesh*/
 	UPROPERTY(EditAnywhere, Category = "Interact Properties")
 	class UStaticMeshComponent* interactableMesh;
-
-	/*Assuming all interactables have a mesh*/
-	UPROPERTY(EditAnywhere, Category = "Interact Properties")
-	class UParticleSystem* interactableVFX;
 };

@@ -33,6 +33,7 @@ void APickup_Pipe::Use_Implementation()
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You damaged the steering room"));
 			MyCharacter->ToggleInventory();
+			MyCharacter->AddSus();
 			GM->DecreaseStable();
 			bUsable = true;
 			GM->bSteeringBroken = true;

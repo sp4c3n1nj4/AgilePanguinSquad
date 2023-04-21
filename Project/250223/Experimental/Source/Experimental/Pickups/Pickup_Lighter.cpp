@@ -33,6 +33,7 @@ void APickup_Lighter::Use_Implementation()
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You broke the oxygen refresher"));
 			MyCharacter->ToggleInventory();
+			MyCharacter->AddSus();
 			GM->DecreaseStable();
 			bUsable = true;
 			GM->bO2RefreshBroken = true;

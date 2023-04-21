@@ -47,18 +47,6 @@ class AExperimentalCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class UInputAction* PauseAction;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	class UInputAction* MapAreaAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	class UInputAction* TestAreaAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	class UInputAction* DecreaseSuspicionAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	class UInputAction* IncreaseSuspicionAction;
-
 public:
 	AExperimentalCharacter();
 
@@ -158,6 +146,11 @@ public:
 
 	/*Toggles between inventory and game*/
 	void ToggleInventory();
+	
+	void AddSus();
+	
+	UFUNCTION(BlueprintCallable, Category = "Chase")
+	void DecreaseSus();
 
 	/*The players inventory, represented as a tarray of pickup objects*/
 	UPROPERTY(EditAnywhere)

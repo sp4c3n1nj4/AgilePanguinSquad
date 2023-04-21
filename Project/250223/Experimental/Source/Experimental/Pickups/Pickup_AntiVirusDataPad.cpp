@@ -34,6 +34,7 @@ void APickup_AntiVirusDataPad::Use_Implementation()
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You have wiped the viruses"));
 			MyCharacter->ToggleInventory();
+			MyCharacter->DecreaseSus();
 			GM->AddStable();
 			bUsable = true;
 			GM->bBridgeBroken = false;

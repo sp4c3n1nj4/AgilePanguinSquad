@@ -33,6 +33,7 @@ void APickup_FireExtinguisher::Use_Implementation()
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You fixed the oxygen refresher"));
 			MyCharacter->ToggleInventory();
+			MyCharacter->DecreaseSus();
 			GM->AddStable();
 			bUsable = true;
 			GM->bO2RefreshBroken = false;

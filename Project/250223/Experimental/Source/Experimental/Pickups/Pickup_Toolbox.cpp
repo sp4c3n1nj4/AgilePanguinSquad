@@ -41,8 +41,10 @@ void APickup_Toolbox::Discard_Implementation()
 
 void APickup_Toolbox::OnPickedUp()
 {
+	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	AExperimentalGameMode* GM = Cast<AExperimentalGameMode>(GetWorld()->GetAuthGameMode());
 
 	GEngine->AddOnScreenDebugMessage(1, 5.f, FColor::Green, TEXT("Toolbox held, malfunction chance has doubled"));
 	GM->chanceNum = 2;
+	MyCharacter->AddSus();
 }

@@ -10,7 +10,6 @@ APickup::APickup()
 	/*Set up the mesh for the pickup, and set the item name, help text and item value*/
 	interactableMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("PickUpMesh"));
 	interactableMesh->SetMobility(EComponentMobility::Static);
-	interactableVFX = CreateDefaultSubobject<UParticleSystem>(TEXT("VFX"));
 
 	itemName = FString("Enter an item name here..."); /*Default string, can be overriden later*/
 	itemAction = FString("Enter an action here...");

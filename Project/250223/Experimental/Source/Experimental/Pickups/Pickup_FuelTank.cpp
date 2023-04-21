@@ -34,6 +34,7 @@ void APickup_FuelTank::Use_Implementation()
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You added fuel to the pipes"));
 			MyCharacter->ToggleInventory();
+			MyCharacter->DecreaseSus();
 			GM->AddStable();
 			bUsable = true;
 			GM->bFuelStorageBroken = false;

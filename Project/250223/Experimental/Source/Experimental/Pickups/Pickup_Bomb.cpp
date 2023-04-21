@@ -163,6 +163,7 @@ void APickup_Bomb::UseAccepted()
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	
 	MyCharacter->ToggleInventory();
+	MyCharacter->AddSus();
 	GM->DecreaseStable();
 	bUsable = true;
 }

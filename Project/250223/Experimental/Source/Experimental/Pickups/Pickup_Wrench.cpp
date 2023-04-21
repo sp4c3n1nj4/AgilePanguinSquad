@@ -105,6 +105,7 @@ void APickup_Wrench::UseAccepted()
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	
 	MyCharacter->ToggleInventory();
+	MyCharacter->DecreaseSus();
 	GM->AddStable();
 	bUsable = true;
 }

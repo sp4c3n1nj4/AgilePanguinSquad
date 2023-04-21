@@ -33,6 +33,7 @@ void APickup_Screwdriver::Use_Implementation()
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You damaged the staff maintenance room"));
 			MyCharacter->ToggleInventory();
+			MyCharacter->AddSus();
 			GM->DecreaseStable();
 			bUsable = true;
 			GM->bStaffMainBroken = true;

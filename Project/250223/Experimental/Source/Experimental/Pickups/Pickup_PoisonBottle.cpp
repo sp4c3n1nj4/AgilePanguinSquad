@@ -34,6 +34,7 @@ void APickup_PoisonBottle::Use_Implementation()
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You poisoned the oxygen/water"));
 			MyCharacter->ToggleInventory();
+			MyCharacter->AddSus();
 			GM->DecreaseStable();
 			bUsable = true;
 			GM->bO2H2OStorageBroken = true;

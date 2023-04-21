@@ -206,48 +206,6 @@ void AExperimentalCharacter::Interact()
 	}
 }
 
-void AExperimentalCharacter::TestArea()
-{
-	FTransform TestAreaT;
-
-	FVector TestAreaLocation = FVector(1470.000000, 2380.000000, 210.000000);
-	FRotator NoRotation = FRotator(0.f, 0.f, 0.f);
-	FVector NormalScale = FVector(1.f, 1.f, 1.f);
-
-	TestAreaT.SetLocation(TestAreaLocation);
-	TestAreaT.SetRotation(NoRotation.Quaternion());
-	TestAreaT.SetScale3D(NormalScale);
-
-	SetActorTransform(TestAreaT);
-	Controller->SetControlRotation(NoRotation);
-}
-
-void AExperimentalCharacter::MapArea()
-{
-	FTransform MapAreaT;
-	
-	FVector MapAreaLocation = FVector(1370.f, 8720.f, 210.f);
-	FRotator MapAreaRotation = FRotator(0.f, -90.f, 0.f);
-	FVector NormalScale = FVector(1.f, 1.f, 1.f);
-
-	MapAreaT.SetLocation(MapAreaLocation);
-	MapAreaT.SetRotation(MapAreaRotation.Quaternion());
-	MapAreaT.SetScale3D(NormalScale);
-
-	SetActorTransform(MapAreaT);
-	Controller->SetControlRotation(MapAreaRotation);
-}
-
-void AExperimentalCharacter::DecreaseSuspicion()
-{
-	suspicionPercentage = suspicionPercentage - 25.f;
-}
-
-void AExperimentalCharacter::IncreaseSuspicion()
-{
-	suspicionPercentage = suspicionPercentage + 25.f;
-}
-
 void AExperimentalCharacter::CheckForInteractables()
 {
 	FVector startTrace = FollowCamera->GetComponentLocation();
@@ -325,6 +283,30 @@ void AExperimentalCharacter::QuitToMenu()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Level will close and menu will open"));
 }
 
+void AExperimentalCharacter::AddSus()
+{
+	if (suspicionPercentage > 80.f)
+	{
+		suspicionPercentage = 100.f;
+	}
+	else
+	{
+		suspicionPercentage += 20.f;
+	}
+}
+
+void AExperimentalCharacter::DecreaseSus()
+{
+	if (suspicionPercentage < 20.f)
+	{
+		suspicionPercentage = 0.f;
+	}
+	else
+	{
+		suspicionPercentage -= 20.f;
+	}
+}
+
 void AExperimentalCharacter::BeginPlay()
 {
 	// Call the base class  
@@ -346,8 +328,6 @@ void AExperimentalCharacter::BeginPlay()
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
 		}
 	}
-
-	GetCharacterMovement()->MaxWalkSpeed = 300.f;
 }
 
 void AExperimentalCharacter::Tick(float DeltaTime)
@@ -374,12 +354,6 @@ void AExperimentalCharacter::SetupPlayerInputComponent(class UInputComponent* Pl
 
 		//Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AExperimentalCharacter::Look);
-
-		/* Testing only, REMOVE BEFORE DEADLINE*/
-		EnhancedInputComponent->BindAction(TestAreaAction, ETriggerEvent::Triggered, this, &AExperimentalCharacter::TestArea);
-		EnhancedInputComponent->BindAction(MapAreaAction, ETriggerEvent::Triggered, this, &AExperimentalCharacter::MapArea);
-		EnhancedInputComponent->BindAction(DecreaseSuspicionAction, ETriggerEvent::Completed, this, &AExperimentalCharacter::DecreaseSuspicion);
-		EnhancedInputComponent->BindAction(IncreaseSuspicionAction, ETriggerEvent::Completed, this, &AExperimentalCharacter::IncreaseSuspicion);
 
 		/*Pause*/
 		EnhancedInputComponent->BindAction(PauseAction, ETriggerEvent::Started, this, &AExperimentalCharacter::PauseGame);

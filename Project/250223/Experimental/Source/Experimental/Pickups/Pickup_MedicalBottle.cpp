@@ -33,6 +33,7 @@ void APickup_MedicalBottle::Use_Implementation()
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You unpoisoned the oxygen/water"));
 			MyCharacter->ToggleInventory();
+			MyCharacter->DecreaseSus();
 			GM->DecreaseStable();
 			bUsable = true;
 			GM->bO2H2OStorageBroken = false;
