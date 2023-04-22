@@ -36,6 +36,7 @@ void APickup_FuelTank::Use_Implementation()
 			MyCharacter->ToggleInventory();
 			MyCharacter->DecreaseSus();
 			GM->AddStable();
+			GM->RepairCheck();
 			bUsable = true;
 			GM->bFuelStorageBroken = false;
 			return;

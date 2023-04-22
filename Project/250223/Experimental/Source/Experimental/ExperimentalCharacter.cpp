@@ -265,6 +265,40 @@ void AExperimentalCharacter::PauseGame()
 	}
 }
 
+void AExperimentalCharacter::GameOver()
+{
+	APlayerController* MyController = GetWorld()->GetFirstPlayerController(); /* Controller REF*/
+	AExperimentalGameMode* GM = Cast<AExperimentalGameMode>(GetWorld()->GetAuthGameMode());
+
+	UGameplayStatics::SetGamePaused(GetWorld(), true);
+	bIsGamePaused = true;
+	GM->ChangeHUDState(GM->HS_GameOver);
+	MyController->SetInputMode(FInputModeGameAndUI());
+}
+
+void AExperimentalCharacter::RepairWinCondition()
+{
+	APlayerController* MyController = GetWorld()->GetFirstPlayerController(); /* Controller REF*/
+	AExperimentalGameMode* GM = Cast<AExperimentalGameMode>(GetWorld()->GetAuthGameMode());
+
+	UGameplayStatics::SetGamePaused(GetWorld(), true);
+	bIsGamePaused = true;
+	GM->ChangeHUDState(GM->HS_RepairWin);
+	MyController->SetInputMode(FInputModeGameAndUI());
+}
+
+void AExperimentalCharacter::DestroyWinCondition()
+{
+	APlayerController* MyController = GetWorld()->GetFirstPlayerController(); /* Controller REF*/
+	AExperimentalGameMode* GM = Cast<AExperimentalGameMode>(GetWorld()->GetAuthGameMode());
+
+	UGameplayStatics::SetGamePaused(GetWorld(), true);
+	bIsGamePaused = true;
+	GM->ChangeHUDState(GM->HS_DestroyWin);
+	MyController->SetInputMode(FInputModeGameAndUI());
+	return;
+}
+
 void AExperimentalCharacter::OpenOptions()
 {
 	/*Open options widget here*/

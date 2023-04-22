@@ -35,6 +35,7 @@ void APickup_MedicalBottle::Use_Implementation()
 			MyCharacter->ToggleInventory();
 			MyCharacter->DecreaseSus();
 			GM->DecreaseStable();
+			GM->RepairCheck();
 			bUsable = true;
 			GM->bO2H2OStorageBroken = false;
 			return;

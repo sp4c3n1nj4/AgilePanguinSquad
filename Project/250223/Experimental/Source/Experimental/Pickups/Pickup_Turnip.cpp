@@ -3,6 +3,7 @@
 #include "Pickup_Turnip.h"
 #include "Kismet/GameplayStatics.h"
 #include "../ExperimentalCharacter.h"
+#include "../ExperimentalGameMode.h"
 
 APickup_Turnip::APickup_Turnip()
 {
@@ -23,10 +24,13 @@ void APickup_Turnip::BeginPlay()
 /*When item is used*/
 void APickup_Turnip::Use_Implementation()
 {
+	AExperimentalGameMode* GM = Cast<AExperimentalGameMode>(GetWorld()->GetAuthGameMode());
+	
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used a turnip: Use_Implementation() IT'S COOL IF YOU'RE SEEING THIS"));
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	MyCharacter->ToggleInventory();
 	MyCharacter->DecreaseSus();
+	GM->RepairCheck();
 	bUsable = true;
 }
 

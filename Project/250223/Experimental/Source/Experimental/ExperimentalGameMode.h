@@ -23,7 +23,10 @@ public:
 	{
 		HS_Ingame, /*0*/
 		HS_Inventory, /*1*/
-		HS_Pause /*2*/
+		HS_Pause, /*2*/
+		HS_GameOver, /*3*/
+		HS_RepairWin, /*4*/
+		HS_DestroyWin /*5*/
 	};
 
 	/*Checks the hud state, and tgeb calls applyHUD accordingly to apply whatever hud we want*/
@@ -39,17 +42,30 @@ public:
 	/*Applies a hud to the screen, returns true if successful, false otherwise*/
 	bool ApplyHUD(TSubclassOf<class UUserWidget> WidgetToApply, bool bShowMouseCursor, bool EnableClickEvents);
 
+	UFUNCTION(BlueprintCallable, Category = "Functions")
 	void AddStable();
-	void DecreaseStable();
 
+	void DecreaseStable();
+	void RepairCheck();
+
+	/*Timer functions*/
+	UFUNCTION(BlueprintCallable, Category = "Timer Functions")
 	void EngineTimer_0();
+	UFUNCTION(BlueprintCallable, Category = "Timer Functions")
 	void EngineTimer_1();
+	UFUNCTION(BlueprintCallable, Category = "Timer Functions")
 	void SteeringTimer();
+	UFUNCTION(BlueprintCallable, Category = "Timer Functions")
 	void O2RefreshTimer();
+	UFUNCTION(BlueprintCallable, Category = "Timer Functions")
 	void O2H2OStorageTimer();
+	UFUNCTION(BlueprintCallable, Category = "Timer Functions")
 	void FuelStorageTimer();
+	UFUNCTION(BlueprintCallable, Category = "Timer Functions")
 	void BridgeTimer();
+	UFUNCTION(BlueprintCallable, Category = "Timer Functions")
 	void StaffMainTimer();
+	UFUNCTION(BlueprintCallable, Category = "Timer Functions")
 	void DOSSTimer();
 
 	void EngineChance_0();
@@ -78,14 +94,23 @@ public:
 	/*----------------------------------------*/
 	
 	/*Broken rooms, cargo hold (Room 2) cannot be broken*/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Broken")
 	bool bEngineBroken_0; // Room 8
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Broken")
 	bool bEngineBroken_1; // Room 9
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Broken")
 	bool bSteeringBroken; //Room 4
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Broken")
 	bool bO2RefreshBroken; //?
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Broken")
 	bool bO2H2OStorageBroken; // Room 10
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Broken")
 	bool bFuelStorageBroken; //?
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Broken")
 	bool bBridgeBroken; //?
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Broken")
 	bool bStaffMainBroken; // Room 11
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Broken")
 	bool bDOSSBroken; //Room 1
 	/*bool bChargingBroken; //Room 7*/
 	/*----------------------------------------------------*/
@@ -113,6 +138,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Variables")
 	int maxStableNum;
 
+	int repairInt;
+	int repairGoal;
+
 	UPROPERTY(EditAnywhere, Category = "SFX")
 	USoundCue* WarningSFX;
 
@@ -138,6 +166,15 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "HUDwidgets", Meta = (BlueprintProtected = "true"))
 	TSubclassOf<class UUserWidget> PauseHUDClass;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "HUDwidgets", Meta = (BlueprintProtected = "true"))
+	TSubclassOf<class UUserWidget> GameOverHUDClass;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "HUDwidgets", Meta = (BlueprintProtected = "true"))
+	TSubclassOf<class UUserWidget> RepairWinHUDClass;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "HUDwidgets", Meta = (BlueprintProtected = "true"))
+	TSubclassOf<class UUserWidget> DestroyWinHUDClass;
 
 	UPROPERTY()
 	class UUserWidget* CurrentWidget;

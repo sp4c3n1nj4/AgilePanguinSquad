@@ -35,6 +35,7 @@ void APickup_FireExtinguisher::Use_Implementation()
 			MyCharacter->ToggleInventory();
 			MyCharacter->DecreaseSus();
 			GM->AddStable();
+			GM->RepairCheck();
 			bUsable = true;
 			GM->bO2RefreshBroken = false;
 			return;

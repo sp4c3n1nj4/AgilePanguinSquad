@@ -38,6 +38,8 @@ AExperimentalGameMode::AExperimentalGameMode()
 
 	stableNum = 100;
 	maxStableNum = 100;
+	repairInt = 0;
+	repairGoal = 10;
 	chanceNum = 1;
 
 	bTutorial = false;
@@ -181,6 +183,21 @@ void AExperimentalGameMode::ApplyHUDChanges()
 		case EHUDState::HS_Pause:
 		{
 			ApplyHUD(PauseHUDClass, true, true);
+			break;
+		}
+		case EHUDState::HS_GameOver:
+		{
+			ApplyHUD(GameOverHUDClass, true, true);
+			break;
+		}
+		case EHUDState::HS_RepairWin:
+		{
+			ApplyHUD(RepairWinHUDClass, true, true);
+			break;
+		}
+		case EHUDState::HS_DestroyWin:
+		{
+			ApplyHUD(DestroyWinHUDClass, true, true);
 			break;
 		}
 		default:
@@ -479,5 +496,17 @@ void AExperimentalGameMode::DOSSChance()
 	{
 		DOSSTimer();
 		return;
+	}
+}
+
+void AExperimentalGameMode::RepairCheck()
+{
+	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
+	
+	repairInt++;
+	
+	if (repairInt >= repairGoal)
+	{
+		MyCharacter->RepairWinCondition();
 	}
 }

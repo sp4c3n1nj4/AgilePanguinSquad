@@ -107,6 +107,7 @@ void APickup_Wrench::UseAccepted()
 	MyCharacter->ToggleInventory();
 	MyCharacter->DecreaseSus();
 	GM->AddStable();
+	GM->RepairCheck();
 	bUsable = true;
 }
 

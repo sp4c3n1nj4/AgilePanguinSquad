@@ -54,6 +54,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HUD")
 	FString helpText;
 
+
 	/*How close the player needs to be to the pickup*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory Functions")
 	float reach;
@@ -68,8 +69,6 @@ public:
 
 	bool bIsGamePaused;
 
-
-	
 	/*Overlap Checks*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Overlaps")
 	bool bEngineOverlap_0;
@@ -135,6 +134,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Pause Menu")
 	void PauseGame();
 
+	UFUNCTION(BlueprintCallable, Category = "Game Over")
+	void GameOver();
+
+	void RepairWinCondition();
+	void DestroyWinCondition();
+
 	UFUNCTION(BlueprintCallable, Category = "Pause Menu")
 	void OpenOptions();
 
@@ -175,10 +180,6 @@ protected:
 
 private:
 	void Interact();
-	void TestArea();
-	void MapArea();
-	void DecreaseSuspicion();
-	void IncreaseSuspicion();
 
 	/*Checks for interactable items directly in front of the player using a linetrace, called on a per tick basis*/
 	void CheckForInteractables();

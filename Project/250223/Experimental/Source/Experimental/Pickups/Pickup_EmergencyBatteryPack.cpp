@@ -3,6 +3,7 @@
 #include "Pickup_EmergencyBatteryPack.h"
 #include "Kismet/GameplayStatics.h"
 #include "../ExperimentalCharacter.h"
+#include "../ExperimentalGameMode.h"
 
 APickup_EmergencyBatteryPack::APickup_EmergencyBatteryPack()
 {
@@ -23,10 +24,13 @@ void APickup_EmergencyBatteryPack::BeginPlay()
 /*When item is used*/
 void APickup_EmergencyBatteryPack::Use_Implementation()
 {
+	AExperimentalGameMode* GM = Cast<AExperimentalGameMode>(GetWorld()->GetAuthGameMode());
+	
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("You used an emergency battery pack: Use_Implementation() IT'S COOL IF YOU'RE SEEING THIS"));
 	AExperimentalCharacter* MyCharacter = Cast<AExperimentalCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	MyCharacter->ToggleInventory();
 	MyCharacter->DecreaseSus();
+	GM->RepairCheck();
 	bUsable = true;
 }
 
