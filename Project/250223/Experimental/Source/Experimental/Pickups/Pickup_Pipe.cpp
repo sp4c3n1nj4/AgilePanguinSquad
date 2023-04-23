@@ -11,7 +11,7 @@ APickup_Pipe::APickup_Pipe()
 	best to set the thumbnail, & mesh in the editor*/
 	itemName = "Pipe";
 	itemAction = "pick up";
-	itemDescription = "Damages steering room. Infinite use.";
+	itemDescription = "Damages generators in the steering room. Infinite use.";
 	uses = NULL;
 	bUsable = false;
 }

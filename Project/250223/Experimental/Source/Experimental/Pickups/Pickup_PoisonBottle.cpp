@@ -13,7 +13,7 @@ APickup_PoisonBottle::APickup_PoisonBottle()
 	uses = 3;
 	itemName = "Poison Bottle";
 	itemAction = "pick up";
-	itemDescription = "Poisons oxygen/water storage. 3x use.";
+	itemDescription = "Poisons water tanks in the oxygen/water storage room. 3x use.";
 	bUsable = false;
 }
 

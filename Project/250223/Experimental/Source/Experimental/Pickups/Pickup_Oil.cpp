@@ -12,7 +12,7 @@ APickup_Oil::APickup_Oil()
 	uses = 3;
 	itemName = "Oil";
 	itemAction = "pick up";
-	itemDescription = "Oil can be used to damage either engine. 3x use.";
+	itemDescription = "Oil can be used to damage generators in either engine room. 3x use.";
 	bUsable = false;
 }
 

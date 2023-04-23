@@ -11,7 +11,7 @@ APickup_Lighter::APickup_Lighter()
 	best to set the thumbnail, & mesh in the editor*/
 	itemName = "Lighter";
 	itemAction = "pick up";
-	itemDescription = "Damages oxygen refreshers. Infinite use.";
+	itemDescription = "Damages the laptop in the oxygen refresher room. Infinite use.";
 	uses = NULL;
 	bUsable = false;
 }

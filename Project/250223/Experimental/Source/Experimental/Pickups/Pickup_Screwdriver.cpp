@@ -11,7 +11,7 @@ APickup_Screwdriver::APickup_Screwdriver()
 	best to set the thumbnail, & mesh in the editor*/
 	itemName = "Screwdriver";
 	itemAction = "pick up";
-	itemDescription = "Permanently damages staff maintenance. Infinite use.";
+	itemDescription = "Permanently damages the staff maintenance safety switch. Infinite use.";
 	uses = NULL;
 	bUsable = false;
 }

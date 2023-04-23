@@ -11,7 +11,7 @@ APickup_Wrench::APickup_Wrench()
 	best to set the thumbnail, & mesh in the editor*/
 	itemName = "Wrench";
 	itemAction = "pick up";
-	itemDescription = "Used to fix either engine, and the steering room. Infinite use.";
+	itemDescription = "Used to fix generators in either engine room, as well as the steering room. Infinite use.";
 	uses = NULL;
 	bUsable = false;
 }

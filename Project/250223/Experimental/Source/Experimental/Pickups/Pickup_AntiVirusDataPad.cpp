@@ -12,7 +12,7 @@ APickup_AntiVirusDataPad::APickup_AntiVirusDataPad()
 	best to set the thumbnail, & mesh in the editor*/
 	itemName = "Anti-Virus Data Pad";
 	itemAction = "pick up";
-	itemDescription = "Can be used to remove viruses on the bridge. Infinite use.";
+	itemDescription = "Can be used to remove viruses on the bridge & D-O-S-S terminals. Infinite use.";
 	uses = NULL;
 	bUsable = false;
 }

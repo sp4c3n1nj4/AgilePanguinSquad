@@ -12,7 +12,7 @@ APickup_FireExtinguisher::APickup_FireExtinguisher()
 	uses = 3;
 	itemName = "Fire Extinguisher";
 	itemAction = "pick up";
-	itemDescription = "Used to repair oxygen refreshers. 3x use.";
+	itemDescription = "Used to repair the laptop in the oxygen refreshers room. 3x use.";
 	bUsable = false;
 }
 

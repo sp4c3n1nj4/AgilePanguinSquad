@@ -12,7 +12,7 @@ APickup_Toolbox::APickup_Toolbox()
 	best to set the thumbnail, & mesh in the editor*/
 	itemName = "Toolbox";
 	itemAction = "pick up";
-	itemDescription = "Holding the toolbox will double the chances of malfunctions.";
+	itemDescription = "Holding the toolbox will double the chances of malfunctions. Doesn't stack!";
 	uses = NULL;
 	bUsable = false;
 }

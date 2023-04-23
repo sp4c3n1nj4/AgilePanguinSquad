@@ -13,7 +13,7 @@ APickup_FuelTank::APickup_FuelTank()
 	uses = 3;
 	itemName = "Fuel Tank";
 	itemAction = "pick up";
-	itemDescription = "Refuels fuel storage. 3x use.";
+	itemDescription = "Refuels fuel tanks in the fuel storage room. 3x use.";
 	bUsable = false;
 }
 

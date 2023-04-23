@@ -11,7 +11,7 @@ APickup_VirusDataPad::APickup_VirusDataPad()
 	best to set the thumbnail, & mesh in the editor*/
 	itemName = "Virus Data Pad";
 	itemAction = "pick up";
-	itemDescription = "Infect viruses on the bridge, or DOSS. Infinite use.";
+	itemDescription = "Infect viruses on either bridge, or DOSS terminals. Infinite use.";
 	uses = NULL;
 	bUsable = false;
 }

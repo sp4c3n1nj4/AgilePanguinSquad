@@ -12,7 +12,7 @@ APickup_MedicalBottle::APickup_MedicalBottle()
 	uses = 3;
 	itemName = "Medical Bottle";
 	itemAction = "pick up";
-	itemDescription = "Unpoisons the oxygen/water storage. 3x use.";
+	itemDescription = "Cures the water tanks in the oxygen/water storage room. 3x use.";
 	bUsable = false;
 }
 
